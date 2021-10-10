@@ -1,25 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import dashboard from '../../Images/Icons/icon-dashboard.svg';
-
-const HeaderWrapper = styled.div`
-    display: flex;    
-    align-items: center;
-    margin: .8rem 0;
-    gap: 1.1rem;
-
-    & img {
-        width: 2.4rem;
-        height: 2.8rem;
-    }
-`;
+import HeaderWrapper from './HeaderWrapper';
 
 const Title = styled.h1`
 color: #14171A;
+width: 12.5rem;
+height: 2.8rem;
 font-style: bold;
-font-weight: 600;
 font-size: 2.4rem;
+font-weight: 600;
 line-height: 2.8rem;
+letter-spacing: -0.0075em;
 `;
 
 const Header = ({title}) => {
