@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const Card = styled.div`
+export const Card = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,15 +14,14 @@ const Card = styled.div`
     padding: 1.2rem 1.6rem;
     margin: 3.2rem 0;
     width: 32.2rem;
-    height: 6.9rem;
-    
+    height: 6.9rem;   
     
     ` : css`
     padding: 1.6rem;
-    ${'' /* margin: auto 2rem; */}
+    margin: auto 2rem;
     width: 29.9rem;
-    height: 7.3rem;    
-     
+    min-width: 29rem;
+    height: 7.3rem;   
     
     `}
 `;

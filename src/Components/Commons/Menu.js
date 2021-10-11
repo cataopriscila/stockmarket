@@ -7,7 +7,9 @@ import Image from './Image';
 
 const MenuWrapper = styled.nav`
     display: block;    
-    background-color: white;   
+    background-color: white; 
+    position: relative; 
+    z-index: 2; 
     
 `;
 

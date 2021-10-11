@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Carousel from "../Commons/Carousel";
-import Graph from "../Commons/Graph";
+import GraphArea from "../Commons/GraphArea";
 import Header from "../Commons/Header";
 import Searchbar from "../Commons/SearchBar";
 
@@ -23,6 +23,8 @@ const DashBoard = ({
   onSearchChange,
   onButtonClick,
   addToFavourites,
+  recents,
+  
 }) => {
   return (
     <DashBoardWrapper>
@@ -31,7 +33,7 @@ const DashBoard = ({
         onSearchChange={onSearchChange}
         onButtonClick={onButtonClick}
       />
-      <Graph
+      <GraphArea
         companySymbol={companySymbol}
         companyName={companyName}
         latestPrice={latestPrice}
@@ -39,7 +41,11 @@ const DashBoard = ({
         changePercent={changePercent}
         addToFavourites={addToFavourites}
       />
-      <Carousel/>
+       <Carousel
+       subtitle="Recent Companies"
+       recents={recents}
+       
+       />  
     </DashBoardWrapper>
   );
 };

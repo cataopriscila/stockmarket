@@ -6,6 +6,7 @@ import DashBoard from './Components/Pages/DashBoard';
 import SideBoard from './Components/Commons/SideBoard';
 
 
+
 require('dotenv').config();
 const GlobalStyle = createGlobalStyle`  
 
@@ -36,10 +37,11 @@ function App() {
   const [companyName, setCompanyName] = useState('COMPANY NAME');
   const [latestPrice, setLatestPrice] = useState('');
   const [change, setChange] = useState(null);
-  const [changePercent, setChangePercent] = useState('');
-  const [iexMarketPercent, setIexMarketPercent] = useState('');
+  const [changePercent, setChangePercent] = useState('');  
   const [favourites, setFavourites] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [recents,setRecents] = useState([]);
+  // const [recentRates, setRecentRates] = useState([]);
   
 
   const onSearchChange = (e) => {     
@@ -54,10 +56,12 @@ function App() {
     
     fetch(`https://cloud.iexapis.com/stable/stock/${company}/logo?token=${API_TOKEN}`)
     .then(response => response.json())
-    .then(data=> setLogo(data.url))
+    .then(data=>{
+      setLogo(data.url);
+      console.log(data);
+    } )
     .catch(err => console.log(err))
-    ;
-    //`https://cloud.iexapis.com/stable/stock/${company}/company?token=${API_TOKEN}`
+    ;   
    
 
     fetch(`https://cloud.iexapis.com/stable/stock/${company}/quote/latestprice?token=${API_TOKEN}`)
@@ -109,14 +113,44 @@ function App() {
   
   const closeMessage = () => {
     setIsDeleted(false);
-  }
+  } 
+
+     
 
 
+ 
   useEffect(() => {
+
+    let arrayOfSymbols = [ 'DIS','AAPL','TWTR','MSFT', 'SBUX', 'FB', 'TSLA', 'BABA'];
     
-    
-  });
+    arrayOfSymbols.forEach((value, i) => {
+    fetch(`https://cloud.iexapis.com/stable/stock/${value}/logo?token=${API_TOKEN}`)
+    .then(response => response.json())
+    .then(data=> { 
+          let logos = [{...data, companySymbol: value}];
+          setRecents(prev => prev.concat(logos));
+           //loop through the state and then change it and then override trhough objectassign      
+           
+    })
+    .catch(err => console.log(err));   
+    }); 
+
+    // arrayOfSymbols.forEach(value => {
+    //   fetch(`https://cloud.iexapis.com/stable/stock/${value}/quote/latestprice?token=${API_TOKEN}`)
+    //   .then(response=> response.json())
+    //   .then(data => {
+    //       let rates = [{changePercent: data.changePercent}];
+    //       let names = [{companyName: data.companyName}];
+    //       setRecentRates(prev => prev.concat(rates, names))
+    //   }).catch(err => console.log(err));
+    //   }) 
   
+    
+       
+    
+  },[]);
+
+    console.log(recents);
 
   return (
     <>
@@ -126,22 +160,25 @@ function App() {
           <DashBoard          
           companySymbol={companySymbol}
           companyName={companyName}
-          latestPrice={latestPrice}
+          latestPrice={latestPrice}          
           change={change}
           changePercent={changePercent}
           onSearchChange={onSearchChange} 
           onButtonClick={onButtonClick} 
           addToFavourites={addToFavourites}
           
+          recents={recents}
+          
+          
           /> 
          <SideBoard           
            favourites={favourites}
            removeFavourites={removeFavourites}
            isDeleted={isDeleted}
-           closeMessage={closeMessage}
-                    
+           closeMessage={closeMessage}                  
            
          /> 
+         
         </PageLayout>      
     </>
   );

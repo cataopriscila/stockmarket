@@ -4,6 +4,7 @@ import graphup from "../../Images/Icons/icon-graph-up.svg";
 import graphdown from "../../Images/Icons/icon-graph-down.svg";
 import FontStyle from "./FontStyle";
 import Image from "./Image";
+import GraphChart from "./GraphChart";
 
 const GraphWrapper = styled.div`
   width: 74.8rem;
@@ -18,15 +19,39 @@ const GraphWrapper = styled.div`
     position: absolute;
     top: 3.5rem;
     left: 2rem;
-    cursor: pointer;
-  }
+    cursor: pointer; 
+    
+    ~ span {
+        visibility: hidden;
+        display: none;
+        position: absolute;               
+        padding: .8rem;        
+        text-align: center;        
+        color: white;
+        font-size: 1.3rem;    
+        top: .1rem;
+        left: 3.2rem;
+        width: 16.1rem;
+        height: 1.3rem;
+        background: #0047BB;
+        border-radius: 1rem 1rem 1rem 0; 
+        transition: all 3s; 
+    }
+
+           &:hover ~ span{
+            visibility: visible;
+            display: inline-block; 
+            transform: scale(1.02);  
+
+        } 
+  }   
 
   .stockStatus{
      padding-left: .5rem;
   }  
 `;
 
-const GraphHeaderData = styled.div`
+export const HeaderSpreader = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -35,9 +60,9 @@ const GraphName = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 20rem;
-  height: 4.1rem;
-  margin-top: 3rem;
+  max-width: 25rem;
+  height: 5rem;
+  margin-top: 2.7rem;
   margin-left: 5.3rem;
 `;
 
@@ -54,7 +79,7 @@ const GraphStockValues = styled.div`
 export const FontValues = styled(FontStyle)`
   color: ${(props) => (props.up ? "#79C300" : "#D64B45")};`;
 
-const Graph = ({
+const GraphArea = ({
   companySymbol,
   companyName,
   latestPrice,
@@ -67,13 +92,14 @@ const Graph = ({
   
   return (
     <GraphWrapper>
-      <GraphHeaderData>
+      <HeaderSpreader>        
         <Image
-          className="favourite"
+          className='favourite'
           src={emptystar}
           alt="empty-star"
           onClick={addToFavourites}
         />
+        <span>Add to favourites</span>
         <GraphName>
           <FontStyle symbol>{companySymbol}</FontStyle>
           <FontStyle>{companyName ? companyName : '(NOT FOUND)'}</FontStyle>
@@ -86,9 +112,10 @@ const Graph = ({
            :(<FontValues up>{change && companyName? `$${change} (${changePercent}%)` : ''}</FontValues>)                   
         }                   
         </GraphStockValues>
-      </GraphHeaderData>
+      </HeaderSpreader>
+      <GraphChart/>
     </GraphWrapper>
   );
 };
 
-export default Graph;
+export default GraphArea;

@@ -17,8 +17,8 @@ letter-spacing: -0.0075em;
 const Header = ({title}) => {
     return (
         <HeaderWrapper>
-           <img src={dashboard} alt='dashboard'/>
-        <Title>{title}</Title>  
+            <img src={dashboard} alt='dashboard'/>
+            <Title>{title}</Title>  
         </HeaderWrapper>              
         
     );

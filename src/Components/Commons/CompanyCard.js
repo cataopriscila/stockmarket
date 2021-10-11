@@ -7,7 +7,7 @@ import trash from '../../Images/Icons/icon-trash.svg';
 import FontStyle from "./FontStyle";
 import graphup from "../../Images/Icons/icon-graph-up.svg";
 import graphdown from "../../Images/Icons/icon-graph-down.svg";
-import { FontValues } from "./Graph";
+import { FontValues } from "./GraphArea";
 
 
 export const ImageLogo = styled(Image)`  
@@ -17,13 +17,13 @@ export const ImageLogo = styled(Image)`
   position: absolute;
 `;
 
-const CompanyInfo = styled.div`
+export const CompanyInfo = styled.div`
     display: flex;
     flex-direction: column;
     padding-left: 5.2rem;     
 `;
 
-const CompanyValues = styled.div`
+export const CompanyValues = styled.div`
     display: flex;
     gap: .5rem;
 
@@ -41,9 +41,8 @@ const CompanyCard = ({logo, companySymbol, companyName, removeFavourites, id, ch
         <CompanyInfo>            
             <FontStyle symbol>{companySymbol}</FontStyle>
             <FontStyle>{companyName}</FontStyle> 
-        </CompanyInfo>
-        <CompanyValues>        
-        
+        </CompanyInfo> 
+        <CompanyValues>       
         
         {upOrDown === -1 || upOrDown === -0? 
             (<FontValues>{`${changePercent}%`}</FontValues>)   
