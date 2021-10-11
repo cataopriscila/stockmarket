@@ -30,7 +30,7 @@ const GraphWrapper = styled.div`
         color: white;
         font-size: 1.3rem;    
         top: .1rem;
-        left: 3.2rem;
+        left: 3.4rem;
         width: 16.1rem;
         height: 1.3rem;
         background: #0047BB;

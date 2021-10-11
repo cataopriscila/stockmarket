@@ -25,17 +25,25 @@ export const CompanyInfo = styled.div`
 
 export const CompanyValues = styled.div`
     display: flex;
-    gap: .5rem;
+    gap: .5rem;    
+
+`;
+
+export const FavouriteCardsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  
 
 `;
 
 const CompanyCard = ({logo, companySymbol, companyName, removeFavourites, id, changePercent}) => {    
  
   let upOrDown = Math.sign(changePercent); 
-  console.log(upOrDown)
+  
   
     return (
     <>
+    <FavouriteCardsWrapper>
       <Card favourite>
         <ImageLogo src={logo} alt="logo" />
         <CompanyInfo>            
@@ -50,14 +58,17 @@ const CompanyCard = ({logo, companySymbol, companyName, removeFavourites, id, ch
         }  
         <img src={upOrDown === -1 || upOrDown === -0? graphdown : graphup} alt='rate'/>      
         </CompanyValues>
-        <Image
+                                
+      </Card>
+      <Image
         trash
         src={trash}
         alt='trash'
         id={id}
         onClick={removeFavourites}           
-        />                        
-      </Card>
+        />
+    </FavouriteCardsWrapper>
+      
            
     </>
   );

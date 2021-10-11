@@ -1,7 +1,7 @@
 import React from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis  } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
-const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400, v: 100},{name: 'Page B', uv: 200, pv: 1200, amt: 2400, v: 200},{name: 'Page C', uv: 300, pv: 1200, amt: 2400, v: 300}];
+const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400, v: 100},{name: 'Page B', uv: 200, pv: 1200, amt: 2400, v: 200},{name: 'Page C', uv: 300, pv: 1200, amt: 2400, v: 300}, {name: 'Page D', uv: 250, pv: 1200, amt: 2400, v:400}];
 // {name: 'Page D', uv: 250, pv: 1200, amt: 2400, v:400}
 
 const GraphChart = () => {
@@ -11,7 +11,7 @@ const GraphChart = () => {
             <CartesianGrid stroke="#ccc" />
             <XAxis dataKey="name" />
             <YAxis />
-
+            <Tooltip />
         </LineChart>
     );
 }

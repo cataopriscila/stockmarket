@@ -5,9 +5,9 @@ import UserProfile from "./UserProfile";
 
 const SideBoardWrapper = styled.div`
   background: #ffffff;
-  display: block;
-  width: 39.6rem;
-  height: 80.1rem;
+  display: inline-block;
+  width: 35.4rem;
+  height: 72.9em;
   padding: 3.6rem 2rem;
   position: relative;
   z-index: 2;

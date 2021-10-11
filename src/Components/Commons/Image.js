@@ -1,8 +1,7 @@
 import styled, { css } from "styled-components";
 
 const Image = styled.img.attrs(props => ({
-    alt:''
-      
+    alt:''      
 }))`    
     margin: ${props => props.menu? '2rem 2.5rem': '0'};
     content: ${props=> props.src};
@@ -13,14 +12,14 @@ const Image = styled.img.attrs(props => ({
     border-radius: 50%;
     `: css`
     width: initial;
-    background: initial;    
+    background: initial;
+       
     `}    
     
     ${props => props.trash? css`
-    position: absolute;
+    ${'' /* position: relative;
     top: 3rem;
-    left: 37rem;
-      
+    left: 37rem;       */}
     `: css`
     position: initial;  
     `}   

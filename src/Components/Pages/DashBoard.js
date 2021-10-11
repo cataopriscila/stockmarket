@@ -23,7 +23,10 @@ const DashBoard = ({
   onSearchChange,
   onButtonClick,
   addToFavourites,
+  addFromRecents,
   recents,
+  onEnterPress
+  
   
 }) => {
   return (
@@ -32,6 +35,7 @@ const DashBoard = ({
       <Searchbar
         onSearchChange={onSearchChange}
         onButtonClick={onButtonClick}
+        onEnterPress={onEnterPress}   
       />
       <GraphArea
         companySymbol={companySymbol}
@@ -44,6 +48,8 @@ const DashBoard = ({
        <Carousel
        subtitle="Recent Companies"
        recents={recents}
+       addFromRecents={addFromRecents}
+       
        
        />  
     </DashBoardWrapper>

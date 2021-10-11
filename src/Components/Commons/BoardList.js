@@ -8,6 +8,7 @@ import FontStyle from './FontStyle';
 import styled from 'styled-components';
 
 
+
 const DeleteMsg = styled(FontStyle)`
     border: 1px solid black;
     text-align: center;
@@ -20,7 +21,8 @@ const DeleteMsg = styled(FontStyle)`
 `;
 
 const BoardList = ({subtitle, favourites, removeFavourites, isDeleted, closeMessage}) => { 
-   
+    
+    
     return (
         <>
             <HeaderWrapper>

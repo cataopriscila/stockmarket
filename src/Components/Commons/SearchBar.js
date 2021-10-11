@@ -9,13 +9,14 @@ const SearchbarWrapper = styled.div`
     margin-bottom: 2.4rem;  
 `;
 
-const Searchbar = ({ onButtonClick, onSearchChange}) => {
+const Searchbar = ({ onButtonClick, onSearchChange, onEnterPress}) => {
     return (
         <SearchbarWrapper>        
             <Input 
-             type='text'
+            type='text'
             placeholder='Search company'                                          
-             onChange={onSearchChange}   
+            onChange={onSearchChange}
+            onKeyPress={onEnterPress}
             />            
             <Button
             square            
