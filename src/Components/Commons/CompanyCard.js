@@ -39,7 +39,7 @@ export const FavouriteCardsWrapper = styled.div`
 const CompanyCard = ({logo, companySymbol, companyName, removeFavourites, id, changePercent}) => {    
  
   let upOrDown = Math.sign(changePercent); 
-  
+ 
   
     return (
     <>
@@ -50,15 +50,17 @@ const CompanyCard = ({logo, companySymbol, companyName, removeFavourites, id, ch
             <FontStyle symbol>{companySymbol}</FontStyle>
             <FontStyle>{companyName}</FontStyle> 
         </CompanyInfo> 
-        <CompanyValues>       
-        
+        {changePercent?(
+          <CompanyValues> 
         {upOrDown === -1 || upOrDown === -0? 
             (<FontValues>{`${changePercent}%`}</FontValues>)   
            :(<FontValues up>{`+${changePercent}%`}</FontValues>)                   
         }  
         <img src={upOrDown === -1 || upOrDown === -0? graphdown : graphup} alt='rate'/>      
         </CompanyValues>
-                                
+        ) : 
+        (<FontValues>no data</FontValues>)
+        }                                
       </Card>
       <Image
         trash

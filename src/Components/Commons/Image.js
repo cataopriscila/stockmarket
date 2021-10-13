@@ -17,9 +17,7 @@ const Image = styled.img.attrs(props => ({
     `}    
     
     ${props => props.trash? css`
-    ${'' /* position: relative;
-    top: 3rem;
-    left: 37rem;       */}
+    cursor: pointer;
     `: css`
     position: initial;  
     `}   

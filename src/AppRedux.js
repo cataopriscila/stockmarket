@@ -12,8 +12,6 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;           
     margin: 0;
     color: black;    
-    ${"" /* ${props => props.theme.fontColor}; */}    
-    ${"" /* ${props => props.theme.textColor}; */}    
     font-weight: 400;    
     font-family: 'Raleway', sans-serif;
 

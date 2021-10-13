@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import ButtonForward from "../../Images/Icons/icon-button-forward.svg";
 import ButtonBack from "../../Images/Icons/icon-button-back.svg";
-import ButtonForward from "../../Images/Icons/icon-button-foward.svg";
 // import Card from './Card';
 import HeaderWrapper from "./HeaderWrapper";
 import Image from "./Image";
@@ -13,24 +13,28 @@ import FontStyle from "./FontStyle";
 
 
 const CarouselWrapper = styled.div`
-  width: 118.3rem;
+  width: 115rem;
   height: 26.5rem;
   display: flex;
   flex-direction: column;
   margin: -2.2rem 0;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 `;
 
-const SlideController = styled.div`
+const SlideController = styled.div`  
   width: 4rem;
   display: flex;
+  margin-left: 36rem;
+
 `;
 
 const CarouselSpreader = styled(HeaderSpreader)`
-  width: 76.5rem;
+  width: 60%;
   align-items: center;
   margin-top: 1rem;
+  
 `;
 
 const SlideButton = styled.img`
@@ -39,40 +43,35 @@ const SlideButton = styled.img`
   border-radius: 0.5rem;
   cursor: pointer;
 
-
 `;
 
 const Flex = styled.div`
   display: inline-flex;
-  width: 80%;
-  overflow: hidden;
-  margin: 0 -50px;
+  width: 100%; 
+  max-width: 130rem; 
+  transition: all 1s;
+  transform: translateX(${props => props.transform}px);
+  
+  
 `;
 
 const Carousel = (props) => {
 
-  const { subtitle, recents, addFromRecents } = props;
+  const { subtitle, recents, addFromRecents, slideForward, slideBack } = props;
 
-  const slideForward = () => {
-    
-  }
-
-  const slideBack = () => {
-    
-  }
+  
   return (
     <>
-      <CarouselWrapper>
-        <CarouselSpreader>
+      <CarouselWrapper>        
           <HeaderWrapper>
             <Image src={stats} alt="stats" />
-            <SubTitle>{subtitle}</SubTitle>
-          </HeaderWrapper>
+            <SubTitle>{subtitle}</SubTitle>          
           <SlideController>
-            <SlideButton onClick={slideBack} src={ButtonBack} alt="btn" />
             <SlideButton onClick={slideForward} src={ButtonForward} alt="btn" />
+            <SlideButton onClick={slideBack} src={ButtonBack} alt="btn" />
           </SlideController>
-        </CarouselSpreader>
+          </HeaderWrapper>
+        <CarouselSpreader>
         <Flex {...props}>
           {!recents.length ? (
             <FontStyle symbol>LOADING</FontStyle>
@@ -80,8 +79,7 @@ const Carousel = (props) => {
             recents.map((value, i) => {
               return (
                 <GeneralCard
-                  addFromRecents={addFromRecents}
-                                 
+                  addFromRecents={addFromRecents}                                 
                   src={recents[i].logo}
                   companySymbol={recents[i].companySymbol}
                   companyName={recents[i].companyName}
@@ -94,25 +92,10 @@ const Carousel = (props) => {
             })
           )}         
         </Flex>
+        </CarouselSpreader>
       </CarouselWrapper>
     </>
   );
 };
 
 export default Carousel;
-
-// const CarouselWrapper = styled.div`
-//     height: 26.5rem;
-//     width:  78.9rem;
-
-// `;
-
-// const Carousel = () => {
-//     return (
-//         <CarouselWrapper>
-
-//         </CarouselWrapper>
-//     );
-// }
-
-// export default Carousel;

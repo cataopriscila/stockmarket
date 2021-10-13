@@ -4,7 +4,7 @@ import Button from './Button';
 import Input from './Input';
 import search from '../../Images/Icons/icon-search.svg';
 
-const SearchbarWrapper = styled.div`
+export const SearchbarWrapper = styled.div`
     display: flex;
     margin-bottom: 2.4rem;  
 `;

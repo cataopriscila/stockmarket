@@ -6,9 +6,10 @@ import FontStyle from "./FontStyle";
 import Image from "./Image";
 import GraphChart from "./GraphChart";
 
+
 const GraphWrapper = styled.div`
   width: 74.8rem;
-  height: 38rem;
+  height: 38rem;  
   border-radius: 0.8rem;
   position: relative;
   display: flex;
@@ -19,7 +20,13 @@ const GraphWrapper = styled.div`
     position: absolute;
     top: 3.5rem;
     left: 2rem;
-    cursor: pointer; 
+    cursor: pointer;
+   
+    
+    &:active, &:focus{
+      transform: scale(.5);              
+    }    
+    
     
     ~ span {
         visibility: hidden;
@@ -85,11 +92,12 @@ const GraphArea = ({
   latestPrice,
   change,
   changePercent,
-  addToFavourites,
+  addToFavourites, 
+  apikey 
 }) => {   
     
     let upOrDown = Math.sign(change);    
-  
+    
   return (
     <GraphWrapper>
       <HeaderSpreader>        
@@ -113,7 +121,10 @@ const GraphArea = ({
         }                   
         </GraphStockValues>
       </HeaderSpreader>
-      <GraphChart/>
+      <GraphChart
+       apikey={apikey}
+       companySymbol={companySymbol}  
+       />      
     </GraphWrapper>
   );
 };
