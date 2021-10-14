@@ -37,7 +37,7 @@ const UserProfile = () => {
         <>
         <UserProfileWrapper>
            <Image avatar src={avatar} alt=''/>
-            <UserName>Marina Andrade Ryca Catão</UserName>
+            <UserName>João da Silva Almeida Magalhães</UserName>
             <Image icon src={chevrondown}/> 
         </UserProfileWrapper>
         
