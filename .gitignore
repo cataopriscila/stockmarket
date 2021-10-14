@@ -8,6 +8,9 @@
 #API keys
 .env
 
+#improvement scketch
+.improvements
+
 # testing
 /coverage
 

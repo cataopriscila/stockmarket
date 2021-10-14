@@ -8,7 +8,7 @@ import Image from "./Image";
 import SubTitle from "./SubTitle";
 import stats from "../../Images/Icons/icon-stats.svg";
 import { HeaderSpreader } from "./GraphArea";
-import GeneralCard from "./GeneralCard";
+import GeneralCard from "./RecentCard";
 import FontStyle from "./FontStyle";
 
 

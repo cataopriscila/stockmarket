@@ -6,19 +6,16 @@ import DashBoard from "./Components/Pages/DashBoard";
 import SideBoard from "./Components/Commons/SideBoard";
 
 require("dotenv").config();
-const GlobalStyle = createGlobalStyle`  
 
+const GlobalStyle = createGlobalStyle`
   body{    
     min-height: 100vh;           
     margin: 0;
-    color: black;    
-    ${"" /* ${props => props.theme.fontColor}; */}    
-    ${"" /* ${props => props.theme.textColor}; */}    
+    color: black;      
     font-weight: 400;    
     font-family: 'Raleway', sans-serif;
 
-    @media(min-width:1440px)
-    {
+    @media(min-width:1440px) {
       font-size: 220%;
     }
   }
@@ -33,7 +30,7 @@ function App() {
   const [companyName, setCompanyName] = useState("COMPANY NAME");
   const [latestPrice, setLatestPrice] = useState("");
   const [change, setChange] = useState(null);
-  const [changePercent, setChangePercent] = useState("");
+  const [changePercent, setChangePercent] = useState(null);
   const [favourites, setFavourites] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [recents, setRecents] = useState([]);
@@ -47,11 +44,7 @@ function App() {
         onButtonClick();
     }        
 }
-  const onButtonClick = () => {
-    
-    //https://cloud.iexapis.com/stable/stock/twtr/chart/5d?token=pk_36840104665a414c8aeccb5b0d1effc5
-
-
+  const onButtonClick = () => {    
     setLatestPrice("");
     setChange("");
     setChangePercent("");
@@ -69,8 +62,7 @@ function App() {
       `https://cloud.iexapis.com/stable/stock/${company}/quote/latestprice?token=${API_TOKEN}`
     )
       .then((response) => response.json())
-      .then((data) => {
-        
+      .then((data) => {        
         setCompanyName(data.companyName);
         setCompanySymbol(data.symbol);
         setLatestPrice(data.latestPrice);
@@ -84,13 +76,12 @@ function App() {
       });
   };
 
-  const addToFavourites = (e) => {    
-
-    if (companyName === "COMPANY NAME") {
+  const addToFavourites = (e) => { 
+    if (companyName === 'COMPANY NAME') {
       e.preventDefault();
     } else if (companySymbol === "NASDAQ symbols only" || companyName === null) {
       setCompanySymbol("NASDAQ symbols only");
-      setCompanyName(null);
+      setCompanyName('(not found)');
       setChangePercent('');
 
     } else if (favourites.some((obj) => obj.companyName === companyName)) {
@@ -113,11 +104,9 @@ function App() {
   const removeFavourites = (e) => {
     if (favourites.some((obj) => e.target.id === obj.id)) {
       favourites.splice(e.target.id, 1);
-
       let updated = favourites.map((obj, i) =>
         Object.assign({}, obj, { id: `${i}` })
       );
-
       setFavourites(updated);      
       setIsDeleted(true);
     }
@@ -127,9 +116,7 @@ function App() {
     setIsDeleted(false);
   };
 
-  const addFromRecents = (e) => {    
-
-     
+  const addFromRecents = (e) => {        
     recents.forEach((value, i) => {
       if (parseInt(e.target.id) === i) { 
             if(favourites.some((obj) => obj.companySymbol === value.companySymbol)) {
@@ -141,11 +128,10 @@ function App() {
     })
 
     setFavourites(favourites);
-    setCompany(Math.random());    
-    console.log('favourites after add from recents',favourites);
+    setCompany(Math.random());   
+    
    
   };
-
  
   useEffect(() => {    
     let arrayOfSymbols = ["TSLA", 'AAPL', "BABA",'MSFT', 'SBUX', 'FB', 'DIS', 'NFLX','TWTR', 'JNJ'];
@@ -157,7 +143,6 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           let logo = {logo: data.url};
-
           fetch(
             `https://cloud.iexapis.com/stable/stock/${value}/quote/latestprice?token=${API_TOKEN}`
           )
@@ -174,9 +159,7 @@ function App() {
             .catch((err) => console.log(err));
         })
         .catch((err) => console.log(err));
-    });
-
-    
+    });    
   }, []);
   
   return (
@@ -196,8 +179,7 @@ function App() {
           addFromRecents={addFromRecents}
           recents={recents}
           onEnterPress={onEnterPress} 
-          apikey={API_TOKEN}        
-          
+          apikey={API_TOKEN}          
         />
         <SideBoard
           favourites={favourites}

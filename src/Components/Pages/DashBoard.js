@@ -17,9 +17,11 @@ const DashBoardWrapper = styled.section`
 const DashBoard = ({
   companySymbol,
   companyName,
+  companyLogo,
   latestPrice,
   change,
   changePercent,
+  isPending,
   onSearchChange,
   onButtonClick,
   addToFavourites,
@@ -60,9 +62,11 @@ const DashBoard = ({
       <GraphArea
         companySymbol={companySymbol}
         companyName={companyName}
+        companyLogo={companyLogo}
         latestPrice={latestPrice}
         change={change}
         changePercent={changePercent}
+        isPending={isPending}
         addToFavourites={addToFavourites}
         apikey={apikey}
       />
