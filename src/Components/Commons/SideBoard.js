@@ -22,8 +22,7 @@ const SideBoard = ({favourites, removeFavourites, isDeleted, closeMessage}) => {
         favourites={favourites}
         removeFavourites={removeFavourites}
         isDeleted={isDeleted}
-        closeMessage={closeMessage}
-        
+        closeMessage={closeMessage}        
         />
     </SideBoardWrapper>
   );

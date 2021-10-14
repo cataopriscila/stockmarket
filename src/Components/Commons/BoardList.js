@@ -33,10 +33,9 @@ const BoardList = ({subtitle, favourites, removeFavourites, isDeleted, closeMess
             </HeaderWrapper>
             {isDeleted && 
                 <DeleteMsg onClick={closeMessage}
-                >SUCCESSFUL DELETED! &nbsp; &#10006;
-                </DeleteMsg>
+                >SUCCESSFUL DELETED! &nbsp; &#10006;</DeleteMsg>
             }           
-            {favourites.length &&
+            {
             favourites.map((value, i) => {
                 return (
                     <CompanyCard
