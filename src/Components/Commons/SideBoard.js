@@ -11,7 +11,6 @@ const SideBoardWrapper = styled.div`
   padding: 3.6rem 2rem;
   position: relative;
   z-index: 2;
-
 `;
 
 const SideBoard = ({favourites, removeFavourites, isDeleted, closeMessage}) => {

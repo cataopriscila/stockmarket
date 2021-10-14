@@ -36,7 +36,7 @@ export const FavouriteCardsWrapper = styled.div`
 
 `;
 
-const CompanyCard = ({logo, companySymbol, companyName, removeFavourites, id, changePercent}) => {    
+const BoardCard = ({logo, companySymbol, companyName, removeFavourites, id, changePercent}) => {    
  
   let upOrDown = Math.sign(changePercent); 
  
@@ -69,11 +69,9 @@ const CompanyCard = ({logo, companySymbol, companyName, removeFavourites, id, ch
         id={id}
         onClick={removeFavourites}           
         />
-    </FavouriteCardsWrapper>
-      
-           
+    </FavouriteCardsWrapper>          
     </>
   );
 };
 
-export default CompanyCard;
+export default BoardCard;

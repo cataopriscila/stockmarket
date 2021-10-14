@@ -3,7 +3,7 @@ import fullstar from '../../Images/Icons/icon-fullstar.svg';
 import Image from './Image';
 import HeaderWrapper from './HeaderWrapper';
 import SubTitle from './SubTitle';
-import CompanyCard from './CompanyCard';
+import CompanyCard from './BoardCard';
 import FontStyle from './FontStyle';
 import styled from 'styled-components';
 
@@ -20,8 +20,7 @@ const DeleteMsg = styled(FontStyle)`
 
 `;
 
-const BoardList = ({subtitle, favourites, removeFavourites, isDeleted, closeMessage}) => { 
-    
+const BoardList = ({subtitle, favourites, removeFavourites, isDeleted, closeMessage}) => {    
     
     return (
         <>
@@ -47,8 +46,7 @@ const BoardList = ({subtitle, favourites, removeFavourites, isDeleted, closeMess
                     logo={favourites[i].logo}
                     key={i}
                     id={i}
-                    removeFavourites={removeFavourites}        
-                    
+                    removeFavourites={removeFavourites}                   
             />
                 );
             })            

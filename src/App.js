@@ -39,12 +39,14 @@ function App() {
     setCompany(e.target.value);
   };
 
-  const onEnterPress = (event) => {        
+  const onEnterPress = (event) => {
+
     if (event.which === 13) {
         onButtonClick();
     }        
 }
-  const onButtonClick = () => {    
+  const onButtonClick = () => {
+           
     setLatestPrice("");
     setChange("");
     setChangePercent("");
@@ -77,12 +79,18 @@ function App() {
   };
 
   const addToFavourites = (e) => { 
+      console.log(companyName, companySymbol, changePercent);
     if (companyName === 'COMPANY NAME') {
       e.preventDefault();
+    } else if ( companyName === "(company not found)" || changePercent === null) {
+        setCompanyName('Not found');
+        setCompanySymbol('');
+        e.preventDefault();
     } else if (companySymbol === "NASDAQ symbols only" || companyName === null) {
       setCompanySymbol("NASDAQ symbols only");
       setCompanyName('(not found)');
       setChangePercent('');
+      setLatestPrice('');
 
     } else if (favourites.some((obj) => obj.companyName === companyName)) {
       setCompanySymbol(`It's already on your list!`);
@@ -97,7 +105,7 @@ function App() {
         id: favourites.length.toString(),
       });
       setFavourites(favourites);
-      setCompany("");
+      setCompany('');
     }
   };
 

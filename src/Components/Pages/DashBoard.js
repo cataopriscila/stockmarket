@@ -28,8 +28,7 @@ const DashBoard = ({
   addFromRecents,
   recents,
   onEnterPress,
-  apikey
-  
+  apikey  
   
 }) => {
 
