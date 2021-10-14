@@ -10,16 +10,16 @@
 <br />
 <div align="center">
   <a href="https://github.com/cataopriscila/stockmarket">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <!-- <img src="/.png" alt="Logo" width="80" height="80"> -->
   </a>
 
 <h3 align="center">Stock Market App</h3>
 
   <p align="center">
-    project_description
+    Project Pescription: a simple app that shows stock values!
     <br />
-    <a href="https://github.com/cataopriscila/stockmarket"><strong>Explore the docs »</strong></a>
-    <br />
+    <!-- <a href="https://github.com/cataopriscila/stockmarket"><strong>Explore the docs »</strong></a>
+    <br /> -->
     <br />
     <a href="https://github.com/cataopriscila/stockmarket">View Demo</a>
     ·
@@ -119,12 +119,12 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [] Replace fetch with axios
-- [] Refactor code to keep it efficient and clean
-- [] Implement Redux
-- [] Search Bar with Stock Companies names as well as symbols
-- [] Stock Companies Suggestions on Search Bar
-- [] Log in Page
+- [ ] Replace fetch with axios
+- [ ] Refactor code to keep it efficient and clean
+- [ ] Implement Redux
+- [ ] Search Bar with Stock Companies names as well as symbols
+- [ ] Stock Companies Suggestions on Search Bar
+- [ ] Log in Page
 
 See the [open issues](https://github.com/cataopriscila/stockmarket/issues) for a full list of proposed features (and known issues).
 
