@@ -1,15 +1,15 @@
 // import React, { useState } from "react";
 import { useState } from "react";
 import styled, { css } from "styled-components";
-import Card from "./Card";
-import FontStyle from "./FontStyle";
+import Card from "./Styled/Card";
+import FontStyle from "./Styled/FontStyle";
 import { FontValues } from "./GraphArea";
 import graphup from "../../Images/Icons/icon-graph-up.svg";
 import graphdown from "../../Images/Icons/icon-graph-down.svg";
 import emptystar from "../../Images/Icons/icon-emptystar.svg";
 import fullstar from "../../Images/Icons/icon-fullstar.svg";
 
-import Image from "./Image";
+import Image from "./Styled/Image";
 
 export const ImageLogo = styled(Image)`
   border-radius: 50%;

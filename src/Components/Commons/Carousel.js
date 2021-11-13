@@ -3,13 +3,13 @@ import styled from "styled-components";
 import ButtonForward from "../../Images/Icons/icon-button-forward.svg";
 import ButtonBack from "../../Images/Icons/icon-button-back.svg";
 // import Card from './Card';
-import HeaderWrapper from "./HeaderWrapper";
-import Image from "./Image";
-import SubTitle from "./SubTitle";
+import HeaderWrapper from "./Styled/HeaderWrapper";
+import Image from "./Styled/Image";
+import SubTitle from "./Styled/SubTitle";
 import stats from "../../Images/Icons/icon-stats.svg";
 import { HeaderSpreader } from "./GraphArea";
 import GeneralCard from "./RecentCard";
-import FontStyle from "./FontStyle";
+import FontStyle from "./Styled/FontStyle";
 
 
 const CarouselWrapper = styled.div`

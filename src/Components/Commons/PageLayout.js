@@ -7,7 +7,7 @@ const Content = styled.section`
     width: 128rem; 
     
     ${props => props.menuTop? css`
-        grid-template-columns: 1fr 39.4rem;
+        grid-template-columns: 88.6rem 39.4rem;
         grid-template-rows: 9.6rem 1fr;
 
         & nav {

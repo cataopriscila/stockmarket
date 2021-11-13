@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import dashboard from '../../Images/Icons/icon-dashboard.svg';
-import HeaderWrapper from './HeaderWrapper';
+import HeaderWrapper from './Styled/HeaderWrapper';
 
 const Title = styled.h1`
 color: #14171A;

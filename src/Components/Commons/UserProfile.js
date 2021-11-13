@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import avatar from '../../Images/Icons/icon-avatar.svg';
 import chevrondown from '../../Images/Icons/icon-chevron-down.svg';
-import FontStyle from './FontStyle';
-import Image from './Image';
+import FontStyle from './Styled/FontStyle';
+import Image from './Styled/Image';
 
 const UserProfileWrapper = styled.div`
     display: flex; 

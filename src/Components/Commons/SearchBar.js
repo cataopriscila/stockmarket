@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from './Button';
-import Input from './Input';
+import Button from './Styled/Button';
+import Input from './Styled/Input';
 import search from '../../Images/Icons/icon-search.svg';
 
 export const SearchbarWrapper = styled.div`

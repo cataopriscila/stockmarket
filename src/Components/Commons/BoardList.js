@@ -1,10 +1,10 @@
 
 import fullstar from '../../Images/Icons/icon-fullstar.svg';
-import Image from './Image';
-import HeaderWrapper from './HeaderWrapper';
-import SubTitle from './SubTitle';
+import Image from './Styled/Image';
+import HeaderWrapper from './Styled/HeaderWrapper';
+import SubTitle from './Styled/SubTitle';
 import CompanyCard from './BoardCard';
-import FontStyle from './FontStyle';
+import FontStyle from './Styled/FontStyle';
 import styled from 'styled-components';
 
 

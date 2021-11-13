@@ -2,9 +2,10 @@ import styled from "styled-components";
 import emptystar from "../../Images/Icons/icon-emptystar.svg";
 import graphup from "../../Images/Icons/icon-graph-up.svg";
 import graphdown from "../../Images/Icons/icon-graph-down.svg";
-import FontStyle from "./FontStyle";
-import Image from "./Image";
+import FontStyle from "./Styled/FontStyle";
+import Image from "./Styled/Image";
 import GraphChart from "./GraphChart";
+
 
 const GraphWrapper = styled.div`
   width: 74.8rem;
@@ -84,6 +85,7 @@ export const FontValues = styled(FontStyle)`
 `;
 
 const GraphArea = ({
+  companyInfo,
   companySymbol,
   companyName,
   companyLogo,
@@ -109,8 +111,7 @@ const GraphArea = ({
         <GraphName>
           <FontStyle symbol>{companySymbol}</FontStyle>
           <FontStyle>{companyName ? companyName : "COMPANY NAME"}</FontStyle>
-
-          {/* <FontStyle>{companyName ? companyName : '(NOT FOUND)'}</FontStyle> */}
+         
         </GraphName>
         <GraphStockValues>
           <img
@@ -139,7 +140,7 @@ const GraphArea = ({
         </GraphStockValues>
       </HeaderSpreader>
 
-      <GraphChart apikey={apikey} companySymbol={companySymbol} />
+      <GraphChart apikey={apikey} companySymbol={companySymbol} companyInfo={companyInfo} />
     </GraphWrapper>
   );
 };

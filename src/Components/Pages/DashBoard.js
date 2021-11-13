@@ -15,6 +15,7 @@ const DashBoardWrapper = styled.section`
 `;
 
 const DashBoard = ({
+  companyInfo,
   companySymbol,
   companyName,
   companyLogo,
@@ -59,6 +60,7 @@ const DashBoard = ({
         onEnterPress={onEnterPress}   
       />
       <GraphArea
+        companyInfo={companyInfo}
         companySymbol={companySymbol}
         companyName={companyName}
         companyLogo={companyLogo}

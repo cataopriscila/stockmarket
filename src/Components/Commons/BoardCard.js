@@ -1,10 +1,10 @@
 // font-family: 'Montserrat', sans-serif;
 
 import styled from "styled-components";
-import Image from './Image';
-import Card from './Card';
+import Image from './Styled/Image';
+import Card from './Styled/Card';
 import trash from '../../Images/Icons/icon-trash.svg';
-import FontStyle from "./FontStyle";
+import FontStyle from "./Styled/FontStyle";
 import graphup from "../../Images/Icons/icon-graph-up.svg";
 import graphdown from "../../Images/Icons/icon-graph-down.svg";
 import { FontValues } from "./GraphArea";

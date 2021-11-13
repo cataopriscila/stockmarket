@@ -46,6 +46,7 @@ function App() {
     }        
 }
   const onButtonClick = () => {
+    
            
     setLatestPrice("");
     setChange("");
@@ -64,7 +65,8 @@ function App() {
       `https://cloud.iexapis.com/stable/stock/${company}/quote/latestprice?token=${API_TOKEN}`
     )
       .then((response) => response.json())
-      .then((data) => {        
+      .then((data) => { 
+        console.log(data.companyName);       
         setCompanyName(data.companyName);
         setCompanySymbol(data.symbol);
         setLatestPrice(data.latestPrice);
@@ -79,7 +81,7 @@ function App() {
   };
 
   const addToFavourites = (e) => { 
-      console.log(companyName, companySymbol, changePercent);
+      
     if (companyName === 'COMPANY NAME') {
       e.preventDefault();
     } else if ( companyName === "(company not found)" || changePercent === null) {
@@ -174,7 +176,7 @@ function App() {
     <>
       <GlobalStyle />
       <PageLayout>
-        <Menu />
+        <Menu/>
         <DashBoard
           companySymbol={companySymbol}
           companyName={companyName}

@@ -1,10 +1,8 @@
 import styled, { css } from "styled-components";
 
-export const Card = styled.div`
-    
+export const Card = styled.div`    
     
     background: #FFFFFF;    
-    
     border-radius: .8rem;
     position: relative;
 

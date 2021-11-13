@@ -1,11 +1,15 @@
 import {
   CHANGE_SEARCHFIELD,
+  ADD_FAVOURITES,
   REQUEST_COMPANY_INFO_PENDING,
   REQUEST_COMPANY_INFO_SUCCESS,
   REQUEST_COMPANY_INFO_FAILED,
   REQUEST_COMPANY_LOGO_PENDING,
   REQUEST_COMPANY_LOGO_SUCCESS,
   REQUEST_COMPANY_LOGO_FAILED,
+  REQUEST_RECENT_COMPANIES_PENDING,
+  REQUEST_RECENT_COMPANIES_SUCCESS,
+  REQUEST_RECENT_COMPANIES_FAILED,
 } from "./constants";
 
 const initialSearch = {
@@ -30,6 +34,7 @@ const initialSearchedCompany = {
   change: null,
   changePercent: null,
   error: "",
+  favouriteCompanies: []
 };
 
 export const requestCompanyInfo = (
@@ -58,6 +63,15 @@ export const requestCompanyInfo = (
         companySymbol: "NASDAQ symbols only",
         isPending: false,
       };
+      case ADD_FAVOURITES: 
+      return Object.assign({}, state, {favouritesCompanies: 
+        [...state.favouriteCompanies, {                
+        companyName: action.payload.companyName,
+        companySymbol: action.payload.companySymbol,        
+        change: action.payload.change,
+        changePercent: action.payload.changePercent,        
+      }]        
+      });
     default:
       return state;
   }
@@ -92,3 +106,26 @@ export const requestCompanyLogo = (
       return state;
   }
 };
+
+
+  const initialRecentCompanies = {    
+    isPending: false,
+    recentCompanies: [],
+    error: "",
+  };
+
+  export const requestRecentCompanies = (state = initialRecentCompanies, action = {}) => {
+    switch (action.type) {
+      case REQUEST_RECENT_COMPANIES_PENDING:
+        return Object.assign({}, state, {isPending: true });
+      case REQUEST_RECENT_COMPANIES_SUCCESS:
+        return {...state, recentCompanies: [ ...state.recentCompanies, action.payload], isPending: false};        
+      case REQUEST_RECENT_COMPANIES_FAILED:
+        return {...state, error: action.payload, isPending: false};  
+      default:
+        return state;
+    }
+  };
+
+
+  

@@ -7,10 +7,10 @@ import { Provider } from "react-redux";
 import { applyMiddleware, createStore, combineReducers } from "redux";
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
-import { searchCompanies, requestCompanyInfo, requestCompanyLogo } from "./Store/reducers";
+import { searchCompanies, requestCompanyInfo, requestCompanyLogo, requestRecentCompanies } from "./Store/reducers";
 
 const logger = createLogger();
-const rootReducer = combineReducers({ searchCompanies, requestCompanyInfo, requestCompanyLogo });
+const rootReducer = combineReducers({ searchCompanies, requestCompanyInfo, requestCompanyLogo, requestRecentCompanies });
 
 const store = createStore(
   rootReducer,

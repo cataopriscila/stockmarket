@@ -29,7 +29,7 @@ const StyledTooltip = styled.div`
     
   `;
 
-const GraphChart = ({apikey, companySymbol}) => {
+const GraphChart = ({apikey, companySymbol, companyInfo}) => {
   
   const [graphPrice, setGraphPrice] = useState(false);
   const [graphChartData, setGraphChartData]= useState([]);
@@ -46,13 +46,12 @@ const GraphChart = ({apikey, companySymbol}) => {
   };
 
   useEffect(() => {
+    
     fetch(`https://cloud.iexapis.com/stable/stock/${companySymbol}/chart/1m?token=${apikey}`)
     .then(response => response.json())
     .then(data =>{
-      if(data){
-        
-        setGraphChartData(data);
-        
+      if(data){        
+        setGraphChartData(data);       
 
       }
         
@@ -60,7 +59,7 @@ const GraphChart = ({apikey, companySymbol}) => {
 
     return null;
    
-  }, [companySymbol, apikey]);
+  }, [companySymbol, companyInfo, apikey]);
   return (
     <>
     <div style={{position:'absolute', top:'34rem', left:'2rem', zIndex: '5'}} >
