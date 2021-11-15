@@ -29,7 +29,7 @@ const StyledTooltip = styled.div`
     
   `;
 
-const GraphChart = ({apikey, companySymbol, companyInfo}) => {
+const GraphChart = ({apikey, companySymbol}) => {
   
   const [graphPrice, setGraphPrice] = useState(false);
   const [graphChartData, setGraphChartData]= useState([]);
@@ -49,24 +49,18 @@ const GraphChart = ({apikey, companySymbol, companyInfo}) => {
     
     fetch(`https://cloud.iexapis.com/stable/stock/${companySymbol}/chart/1m?token=${apikey}`)
     .then(response => response.json())
-    .then(data =>{
-      if(data){        
-        setGraphChartData(data);       
-
-      }
-        
-    }).catch(err => console.log(err));
+    .then(data => setGraphChartData(data))
+    .catch(err => console.log(err));
 
     return null;
    
-  }, [companySymbol, companyInfo, apikey]);
+  }, [companySymbol, apikey]);
   return (
     <>
     <div style={{position:'absolute', top:'34rem', left:'2rem', zIndex: '5'}} >
      <input type='checkbox' defaultChecked={graphPrice} onChange={()=> setGraphPrice(s=>!s)} name='showprice' />
     <label htmlFor='showprice'>Show open prices</label> 
-    </div>
-    
+    </div>    
     <ComposedChart
       width={700}
       height={330}
@@ -94,8 +88,7 @@ const GraphChart = ({apikey, companySymbol, companyInfo}) => {
           textAnchor: "middle",
         }}
       />
-      <YAxis
-        
+      <YAxis        
         tickCount={50}            
         label={{
           value: "Prices (USD)",
@@ -105,15 +98,13 @@ const GraphChart = ({apikey, companySymbol, companyInfo}) => {
         }}
       />
       {graphPrice ? (
-        <Tooltip
-          
+        <Tooltip          
           cursor={{ stroke: "blue", strokeWidth: 2 }}          
           content={<CustomTooltip />}
         />
       ) : (
         <Tooltip />
       )}
-
       <Legend
         width={100}
         wrapperStyle={{

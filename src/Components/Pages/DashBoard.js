@@ -24,7 +24,7 @@ const DashBoard = ({
   changePercent,
   isPending,
   onSearchSubmit,
-  onButtonClick,
+  // onButtonClick,
   addToFavourites,
   addFromRecents,
   recents,
@@ -56,7 +56,7 @@ const DashBoard = ({
       <Header title="Dashboard" />
       <Searchbar
         onSearchSubmit={onSearchSubmit}
-        onButtonClick={onButtonClick}
+        // onButtonClick={onButtonClick}
         onEnterPress={onEnterPress}   
       />
       <GraphArea

@@ -89,7 +89,7 @@ const GraphArea = ({
   isPending,
   apikey,
 }) => {
-  const { companySymbol, companyName, change, latestPrice, changePercent } =
+  const { data, symbol, companyName, change, latestPrice, changePercent } =
     company;
   
 
@@ -104,29 +104,26 @@ const GraphArea = ({
         />
         <span>Add to favourites</span>
         <GraphName>
-          <FontStyle symbol>{companySymbol}</FontStyle>
-          <FontStyle>{companyName}</FontStyle>
+          <FontStyle symbol>{symbol}</FontStyle>
+          <FontStyle>{companyName || data}</FontStyle>
         </GraphName>
         <GraphStockValues>
           <img
             className="stockStatus"
-            src={!change ? '' : change > 0 ? graphup : graphdown}
+            src={!change ? "" : change > 0 ? graphup : graphdown}
             alt=""
           />
-          <FontStyle symbol>{latestPrice}</FontStyle>          
-          {!change? '' : change < 0 ? (
+          <FontStyle symbol>{latestPrice}</FontStyle>
+          {!change ? (
+            ""
+          ) : change < 0 ? (
             <FontValues>{`$${change} (${changePercent}%)`}</FontValues>
           ) : (
             <FontValues up>{`$${change} (${changePercent}%)`}</FontValues>
           )}
         </GraphStockValues>
       </HeaderSpreader>
-
-      <GraphChart
-        apikey={apikey}
-        companySymbol={companySymbol}
-        company={company}
-      />
+      <GraphChart apikey={apikey} companySymbol={symbol} />
     </GraphWrapper>
   );
 };

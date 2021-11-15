@@ -5,6 +5,7 @@ import Menu from "./Components/Commons/Menu";
 import PageLayout from "./Components/Commons/PageLayout";
 import DashBoard from "./Components/Pages/DashBoard";
 import SideBoard from "./Components/Commons/SideBoard";
+import Alert from "./Components/Alert";
 
 require("dotenv").config();
 
@@ -25,95 +26,121 @@ const GlobalStyle = createGlobalStyle`
 const API_TOKEN = `${process.env.REACT_APP_API_KEY}`;
 
 function App() {
-  const [logo, setLogo] = useState("Logo");
-  const [company, setCompany] = useState("");
-  const [companySymbol, setCompanySymbol] = useState("");
-  const [companyName, setCompanyName] = useState("COMPANY NAME");
-  const [latestPrice, setLatestPrice] = useState("");
-  const [change, setChange] = useState(null);
-  const [changePercent, setChangePercent] = useState(null);
+  const [logo, setLogo] = useState('');
+  const [company, setCompany] = useState({}); 
+  const [alert, setAlert] = useState(''); 
+  const [alertDisplay, setAlertDisplay] = useState(false);
+    console.log(alertDisplay);
+
   const [favourites, setFavourites] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [recents, setRecents] = useState([]);
 
   const onSearchSubmit = async (symbol) => {
-    const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote/latestprice?token=${API_TOKEN}`)
+    try {
+      const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote/latestprice?token=${API_TOKEN}`);
+      setCompany(response.data);
+      console.log(response.data);
 
-    setCompany(response.data);
-    console.log(response.data);
-    // setCompanyName(response.data.companyName);
-    // setCompanySymbol(response.data.symbol);
-    // setLatestPrice(response.data.latestPrice);
-    // setChange(response.data.change);
-    // setChangePercent(response.data.changePercent);              
-        
-    }
+    } catch (error) {      
+      setCompany(error.response);
+    }   
+  }
 
+  const goBack = () => {
+    setAlert('');
+    setAlertDisplay(false);
+  }
 
-  const onButtonClick = () => {
+  // const onButtonClick = () => {
     
            
-    setLatestPrice("");
-    setChange("");
-    setChangePercent("");
+  //   setLatestPrice("");
+  //   setChange("");
+  //   setChangePercent("");
 
-    fetch(
-      `https://cloud.iexapis.com/stable/stock/${company}/logo?token=${API_TOKEN}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setLogo(data.url);
-      })
-      .catch((err) => console.log(err));
+  //   fetch(
+  //     `https://cloud.iexapis.com/stable/stock/${company}/logo?token=${API_TOKEN}`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setLogo(data.url);
+  //     })
+  //     .catch((err) => console.log(err));
 
-    fetch(
-      `https://cloud.iexapis.com/stable/stock/${company}/quote/latestprice?token=${API_TOKEN}`
-    )
-      .then((response) => response.json())
-      .then((data) => { 
-        console.log(data.companyName);       
-        setCompanyName(data.companyName);
-        setCompanySymbol(data.symbol);
-        setLatestPrice(data.latestPrice);
-        setChange(data.change);
-        setChangePercent(data.changePercent);
-      })
-      .catch((err) => {
-        console.log(err);
-        setCompanySymbol("NASDAQ symbols only");
-        setCompanyName("(company not found)");
-      });
-  };
+  //   fetch(
+  //     `https://cloud.iexapis.com/stable/stock/${company}/quote/latestprice?token=${API_TOKEN}`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => { 
+  //       console.log(data.companyName);       
+  //       setCompanyName(data.companyName);
+  //       setCompanySymbol(data.symbol);
+  //       setLatestPrice(data.latestPrice);
+  //       setChange(data.change);
+  //       setChangePercent(data.changePercent);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       setCompanySymbol("NASDAQ symbols only");
+  //       setCompanyName("(company not found)");
+  //     });
+  // };
 
-  const addToFavourites = (e) => { 
+  const addToFavourites = async (e) => { 
+    
+    const {symbol, companyName, changePercent} = company;
+    try {
+      const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${company.symbol}/logo?token=${API_TOKEN}`);      
+      setLogo(response.data.url); 
+      if(changePercent){
+          if (favourites.some((obj) => obj.companyName === companyName)) {
+            setAlertDisplay(true);
+            setAlert('Stock already on your list of favourites')
+          } else {
+            setFavourites([...favourites, {logo: response.data.url, symbol, companyName, changePercent, id: favourites.length.toString()}]);
+          }
+      } else {
+          setAlertDisplay(true);
+          setAlert('Poor stock data. Find another symbol')
+      }
+    } catch (error) {      
+      console.log(error);
+    } 
+    
+    
+
+    // if(company.symbol){
+
+    // }
       
-    if (companyName === 'COMPANY NAME') {
-      e.preventDefault();
-    } else if ( companyName === "(company not found)" || changePercent === null) {
-        setCompanyName('Not found');
-        setCompanySymbol('');
-        e.preventDefault();
-    } else if (companySymbol === "NASDAQ symbols only" || companyName === null) {
-      setCompanySymbol("NASDAQ symbols only");
-      setCompanyName('(not found)');
-      setChangePercent('');
-      setLatestPrice('');
+    // if (companyName === 'COMPANY NAME') {
+    //   e.preventDefault();
+    // } else if ( companyName === "(company not found)" || changePercent === null) {
+    //     setCompanyName('Not found');
+    //     setCompanySymbol('');
+    //     e.preventDefault();
+    // } else if (companySymbol === "NASDAQ symbols only" || companyName === null) {
+    //   setCompanySymbol("NASDAQ symbols only");
+    //   setCompanyName('(not found)');
+    //   setChangePercent('');
+    //   setLatestPrice('');
 
-    } else if (favourites.some((obj) => obj.companyName === companyName)) {
-      setCompanySymbol(`It's already on your list!`);
-      setCompanyName(null);
+    // } else if (favourites.some((obj) => obj.companyName === companyName)) {
+    //   setCompanySymbol(`It's already on your list!`);
+    //   setCompanyName(null);
       
-    } else {
-      favourites.push({
-        logo,
-        companySymbol,
-        companyName,
-        changePercent,
-        id: favourites.length.toString(),
-      });
-      setFavourites(favourites);
-      setCompany('');
-    }
+    // } else {
+    //   favourites.push({
+    //     logo,
+    //     companySymbol,
+    //     companyName,
+    //     changePercent,
+    //     id: favourites.length.toString(),
+    //   });
+    //   setFavourites(favourites);
+    //   setCompany('');
+    // }
   };
 
   const removeFavourites = (e) => {
@@ -180,17 +207,15 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <Alert alert={alert}
+             alertDisplay={alertDisplay}
+             goBack={goBack}
+      />
       <PageLayout>
         <Menu/>
         <DashBoard
-          company={company}
-          companySymbol={companySymbol}
-          companyName={companyName}
-          latestPrice={latestPrice}
-          change={change}
-          changePercent={changePercent}
-          onSearchSubmit={onSearchSubmit}
-          onButtonClick={onButtonClick}
+          company={company}          
+          onSearchSubmit={onSearchSubmit}          
           addToFavourites={addToFavourites}
           addFromRecents={addFromRecents}
           recents={recents}          
