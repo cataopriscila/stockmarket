@@ -13,7 +13,7 @@ const FontStyle = styled.h4`
     : css`
     font-weight: 400;
     font-size: 1.4rem;
-    line-height: 1.9rem;
+    line-height: 1.4rem;
     color: #657786; 
     `}
     `;

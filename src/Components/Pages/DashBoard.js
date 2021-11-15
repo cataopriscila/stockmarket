@@ -15,7 +15,7 @@ const DashBoardWrapper = styled.section`
 `;
 
 const DashBoard = ({
-  companyInfo,
+  company,
   companySymbol,
   companyName,
   companyLogo,
@@ -23,7 +23,7 @@ const DashBoard = ({
   change,
   changePercent,
   isPending,
-  onSearchChange,
+  onSearchSubmit,
   onButtonClick,
   addToFavourites,
   addFromRecents,
@@ -55,12 +55,12 @@ const DashBoard = ({
     <DashBoardWrapper>
       <Header title="Dashboard" />
       <Searchbar
-        onSearchChange={onSearchChange}
+        onSearchSubmit={onSearchSubmit}
         onButtonClick={onButtonClick}
         onEnterPress={onEnterPress}   
       />
       <GraphArea
-        companyInfo={companyInfo}
+        company={company}
         companySymbol={companySymbol}
         companyName={companyName}
         companyLogo={companyLogo}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import Button from './Styled/Button';
 import Input from './Styled/Input';
@@ -9,20 +9,30 @@ export const SearchbarWrapper = styled.div`
     margin-bottom: 2.4rem;  
 `;
 
-const Searchbar = ({ onButtonClick, onSearchChange, onEnterPress}) => {
+const Searchbar = ({ onButtonClick, onSearchSubmit}) => {
+    const [input, setInput] = useState("");
+  
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+        onSearchSubmit(input);
+    }
+
     return (
-        <SearchbarWrapper>        
-            <Input 
-            type='text'
-            placeholder='Search company'                                          
-            onChange={onSearchChange}
-            onKeyPress={onEnterPress}
-            />            
-            <Button
-            square            
-            onClick={onButtonClick}>
-                <img src={search} alt='search-icon'/>
-            </Button>
+        <SearchbarWrapper> 
+            <form onSubmit={onFormSubmit}>
+               <Input 
+                type="text"
+                placeholder="Search by company symbol"
+                value={input}                                          
+                onChange={e => setInput(e.target.value)}                
+                />            
+                <Button
+                square            
+                onClick={onButtonClick}>
+                    <img src={search} alt='search-icon'/>
+                </Button> 
+            </form>       
+            
         </SearchbarWrapper>        
     );
 }

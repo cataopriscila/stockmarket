@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import { createGlobalStyle } from "styled-components";
 import Menu from "./Components/Commons/Menu";
 import PageLayout from "./Components/Commons/PageLayout";
@@ -35,16 +36,20 @@ function App() {
   const [isDeleted, setIsDeleted] = useState(false);
   const [recents, setRecents] = useState([]);
 
-  const onSearchChange = (e) => {
-    setCompany(e.target.value);
-  };
+  const onSearchSubmit = async (symbol) => {
+    const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote/latestprice?token=${API_TOKEN}`)
 
-  const onEnterPress = (event) => {
+    setCompany(response.data);
+    console.log(response.data);
+    // setCompanyName(response.data.companyName);
+    // setCompanySymbol(response.data.symbol);
+    // setLatestPrice(response.data.latestPrice);
+    // setChange(response.data.change);
+    // setChangePercent(response.data.changePercent);              
+        
+    }
 
-    if (event.which === 13) {
-        onButtonClick();
-    }        
-}
+
   const onButtonClick = () => {
     
            
@@ -178,17 +183,17 @@ function App() {
       <PageLayout>
         <Menu/>
         <DashBoard
+          company={company}
           companySymbol={companySymbol}
           companyName={companyName}
           latestPrice={latestPrice}
           change={change}
           changePercent={changePercent}
-          onSearchChange={onSearchChange}
+          onSearchSubmit={onSearchSubmit}
           onButtonClick={onButtonClick}
           addToFavourites={addToFavourites}
           addFromRecents={addFromRecents}
-          recents={recents}
-          onEnterPress={onEnterPress} 
+          recents={recents}          
           apikey={API_TOKEN}          
         />
         <SideBoard

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import logo from '../../Images/Icons/monetus-logo.svg';
+import logo from '../../Images/Icons/logo.svg';
 import home from '../../Images/Icons/icon-home.svg';
 import Image from './Styled/Image';
 

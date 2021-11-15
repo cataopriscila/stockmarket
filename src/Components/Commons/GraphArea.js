@@ -6,7 +6,6 @@ import FontStyle from "./Styled/FontStyle";
 import Image from "./Styled/Image";
 import GraphChart from "./GraphChart";
 
-
 const GraphWrapper = styled.div`
   width: 74.8rem;
   height: 38rem;
@@ -49,7 +48,6 @@ const GraphWrapper = styled.div`
       transform: scale(1.02);
     }
   }
-
   .stockStatus {
     padding-left: 0.5rem;
   }
@@ -74,7 +72,7 @@ const GraphStockValues = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  width: 12.5rem;
+  width: 15.5rem;
   height: 4.5rem;
   margin-top: 2.5rem;
   margin-right: 2rem;
@@ -85,18 +83,15 @@ export const FontValues = styled(FontStyle)`
 `;
 
 const GraphArea = ({
-  companyInfo,
-  companySymbol,
-  companyName,
+  company,
   companyLogo,
-  latestPrice,
-  change,
-  changePercent,
   addToFavourites,
   isPending,
   apikey,
 }) => {
-  let upOrDown = Math.sign(change);
+  const { companySymbol, companyName, change, latestPrice, changePercent } =
+    company;
+  
 
   return (
     <GraphWrapper>
@@ -110,37 +105,28 @@ const GraphArea = ({
         <span>Add to favourites</span>
         <GraphName>
           <FontStyle symbol>{companySymbol}</FontStyle>
-          <FontStyle>{companyName ? companyName : "COMPANY NAME"}</FontStyle>
-         
+          <FontStyle>{companyName}</FontStyle>
         </GraphName>
         <GraphStockValues>
           <img
             className="stockStatus"
-            src={
-              Boolean(!change)
-                ? ""
-                : upOrDown === -1 || upOrDown === -0
-                ? graphdown
-                : graphup
-            }
+            src={!change ? '' : change > 0 ? graphup : graphdown}
             alt=""
           />
-          <FontStyle symbol>
-            {latestPrice && companyName ? `$${latestPrice}` : ""}
-          </FontStyle>
-          {upOrDown === -1 || upOrDown === -0 ? (
-            <FontValues>
-              {change && companyName ? `$${change} (${changePercent}%)` : ""}
-            </FontValues>
+          <FontStyle symbol>{latestPrice}</FontStyle>          
+          {!change? '' : change < 0 ? (
+            <FontValues>{`$${change} (${changePercent}%)`}</FontValues>
           ) : (
-            <FontValues up>
-              {change && companyName ? `$${change} (${changePercent}%)` : ""}
-            </FontValues>
+            <FontValues up>{`$${change} (${changePercent}%)`}</FontValues>
           )}
         </GraphStockValues>
       </HeaderSpreader>
 
-      <GraphChart apikey={apikey} companySymbol={companySymbol} companyInfo={companyInfo} />
+      <GraphChart
+        apikey={apikey}
+        companySymbol={companySymbol}
+        company={company}
+      />
     </GraphWrapper>
   );
 };
