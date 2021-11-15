@@ -30,8 +30,6 @@ function App() {
   const [company, setCompany] = useState({}); 
   const [alert, setAlert] = useState(''); 
   const [alertDisplay, setAlertDisplay] = useState(false);
-    console.log(alertDisplay);
-
   const [favourites, setFavourites] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [recents, setRecents] = useState([]);
@@ -50,45 +48,9 @@ function App() {
   const goBack = () => {
     setAlert('');
     setAlertDisplay(false);
-  }
+  } 
 
-  // const onButtonClick = () => {
-    
-           
-  //   setLatestPrice("");
-  //   setChange("");
-  //   setChangePercent("");
-
-  //   fetch(
-  //     `https://cloud.iexapis.com/stable/stock/${company}/logo?token=${API_TOKEN}`
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setLogo(data.url);
-  //     })
-  //     .catch((err) => console.log(err));
-
-  //   fetch(
-  //     `https://cloud.iexapis.com/stable/stock/${company}/quote/latestprice?token=${API_TOKEN}`
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => { 
-  //       console.log(data.companyName);       
-  //       setCompanyName(data.companyName);
-  //       setCompanySymbol(data.symbol);
-  //       setLatestPrice(data.latestPrice);
-  //       setChange(data.change);
-  //       setChangePercent(data.changePercent);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       setCompanySymbol("NASDAQ symbols only");
-  //       setCompanyName("(company not found)");
-  //     });
-  // };
-
-  const addToFavourites = async (e) => { 
-    
+  const addToFavourites = async () => {     
     const {symbol, companyName, changePercent} = company;
     try {
       const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${company.symbol}/logo?token=${API_TOKEN}`);      
@@ -98,7 +60,7 @@ function App() {
             setAlertDisplay(true);
             setAlert('Stock already on your list of favourites')
           } else {
-            setFavourites([...favourites, {logo: response.data.url, symbol, companyName, changePercent, id: favourites.length.toString()}]);
+            setFavourites([...favourites, {logo, symbol, companyName, changePercent, id: favourites.length.toString()}]);
           }
       } else {
           setAlertDisplay(true);
@@ -106,41 +68,7 @@ function App() {
       }
     } catch (error) {      
       console.log(error);
-    } 
-    
-    
-
-    // if(company.symbol){
-
-    // }
-      
-    // if (companyName === 'COMPANY NAME') {
-    //   e.preventDefault();
-    // } else if ( companyName === "(company not found)" || changePercent === null) {
-    //     setCompanyName('Not found');
-    //     setCompanySymbol('');
-    //     e.preventDefault();
-    // } else if (companySymbol === "NASDAQ symbols only" || companyName === null) {
-    //   setCompanySymbol("NASDAQ symbols only");
-    //   setCompanyName('(not found)');
-    //   setChangePercent('');
-    //   setLatestPrice('');
-
-    // } else if (favourites.some((obj) => obj.companyName === companyName)) {
-    //   setCompanySymbol(`It's already on your list!`);
-    //   setCompanyName(null);
-      
-    // } else {
-    //   favourites.push({
-    //     logo,
-    //     companySymbol,
-    //     companyName,
-    //     changePercent,
-    //     id: favourites.length.toString(),
-    //   });
-    //   setFavourites(favourites);
-    //   setCompany('');
-    // }
+    }     
   };
 
   const removeFavourites = (e) => {
