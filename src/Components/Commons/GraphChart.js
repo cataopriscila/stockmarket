@@ -55,9 +55,10 @@ const GraphChart = ({apikey, companySymbol}) => {
     return null;
    
   }, [companySymbol, apikey]);
+
   return (
     <>
-    <div style={{position:'absolute', top:'34rem', left:'2rem', zIndex: '5'}} >
+    <div style={{position:'absolute', top:'35.5rem', left:'2rem', zIndex: '5'}} >
      <input type='checkbox' defaultChecked={graphPrice} onChange={()=> setGraphPrice(s=>!s)} name='showprice' />
     <label htmlFor='showprice'>Show open prices</label> 
     </div>    
@@ -106,12 +107,12 @@ const GraphChart = ({apikey, companySymbol}) => {
         <Tooltip />
       )}
       <Legend
-        width={100}
+        width={120}
         wrapperStyle={{
-          top: 1,
+          bottom: 75,
           right: 1,
           backgroundColor: "#f5f5f5",
-          border: "1px solid #d5d5d5",
+          border: "2px solid #d5d5d5",
           borderRadius: 3,
           lineHeight: "20px",
         }}

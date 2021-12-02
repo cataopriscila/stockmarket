@@ -1,9 +1,9 @@
 import React, {useState } from "react";
 import styled from "styled-components";
-import Carousel from "../Commons/Carousel";
-import GraphArea from "../Commons/GraphArea";
-import Header from "../Commons/Header";
-import Searchbar from "../Commons/SearchBar";
+import Carousel from "./Carousel";
+import GraphArea from "./GraphArea";
+import Header from "./Header";
+import Searchbar from "./SearchBar";
 
 const DashBoardWrapper = styled.section`
   background-color: #f5f8fa;
@@ -15,20 +15,11 @@ const DashBoardWrapper = styled.section`
 `;
 
 const DashBoard = ({
-  company,
-  companySymbol,
-  companyName,
-  companyLogo,
-  latestPrice,
-  change,
-  changePercent,
-  isPending,
-  onSearchSubmit,
-  // onButtonClick,
+  company,  
+  onSearchSubmit,  
   addToFavourites,
   addFromRecents,
-  recents,
-  onEnterPress,
+  recents,  
   apikey  
   
 }) => {
@@ -47,27 +38,17 @@ const DashBoard = ({
       setSlide(slide-100)
     } else {
       e.preventDefault();
-    }
-    
+    }    
   }
 
   return (
     <DashBoardWrapper>
       <Header title="Dashboard" />
       <Searchbar
-        onSearchSubmit={onSearchSubmit}
-        // onButtonClick={onButtonClick}
-        onEnterPress={onEnterPress}   
+        onSearchSubmit={onSearchSubmit}          
       />
       <GraphArea
-        company={company}
-        companySymbol={companySymbol}
-        companyName={companyName}
-        companyLogo={companyLogo}
-        latestPrice={latestPrice}
-        change={change}
-        changePercent={changePercent}
-        isPending={isPending}
+        company={company}        
         addToFavourites={addToFavourites}
         apikey={apikey}
       />

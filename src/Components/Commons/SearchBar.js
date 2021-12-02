@@ -10,7 +10,7 @@ export const SearchbarWrapper = styled.div`
 `;
 
 const Searchbar = ({ onSearchSubmit }) => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
 
   const onFormSubmit = (e) => {
     e.preventDefault();

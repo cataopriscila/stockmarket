@@ -8,7 +8,7 @@ import GraphChart from "./GraphChart";
 
 const GraphWrapper = styled.div`
   width: 74.8rem;
-  height: 38rem;
+  height: 42rem;
   border-radius: 0.8rem;
   position: relative;
   display: flex;
@@ -23,7 +23,7 @@ const GraphWrapper = styled.div`
 
     &:active,
     &:focus {
-      transform: scale(0.5);
+      transform: scale(0.4);
     }
 
     ~ span {
@@ -34,10 +34,10 @@ const GraphWrapper = styled.div`
       text-align: center;
       color: white;
       font-size: 1.3rem;
-      top: 0.1rem;
+      top: 0;
       left: 3.4rem;
       width: 16.1rem;
-      height: 1.3rem;
+      height: 1.2rem;
       background: #0047bb;
       border-radius: 1rem 1rem 1rem 0;
       transition: all 3s;
@@ -62,7 +62,7 @@ const GraphName = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 25rem;
+  max-width: 40rem;
   height: 5rem;
   margin-top: 2.7rem;
   margin-left: 5.3rem;
@@ -82,16 +82,8 @@ export const FontValues = styled(FontStyle)`
   color: ${(props) => (props.up ? "#79C300" : "#D64B45")};
 `;
 
-const GraphArea = ({
-  company,
-  companyLogo,
-  addToFavourites,
-  isPending,
-  apikey,
-}) => {
-  const { data, symbol, companyName, change, latestPrice, changePercent } =
-    company;
-  
+const GraphArea = ({ company, addToFavourites, apikey }) => {
+  const { symbol, companyName, change, latestPrice, changePercent } = company;
 
   return (
     <GraphWrapper>
@@ -105,12 +97,12 @@ const GraphArea = ({
         <span>Add to favourites</span>
         <GraphName>
           <FontStyle symbol>{symbol}</FontStyle>
-          <FontStyle>{companyName || data}</FontStyle>
+          <FontStyle>{companyName}</FontStyle>
         </GraphName>
         <GraphStockValues>
           <img
             className="stockStatus"
-            src={!change ? "" : change > 0 ? graphup : graphdown}
+            src={!change ? "" : change < 0 ? graphdown : graphup}
             alt=""
           />
           <FontStyle symbol>{latestPrice}</FontStyle>

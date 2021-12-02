@@ -8,7 +8,6 @@ import graphup from "../../Images/Icons/icon-graph-up.svg";
 import graphdown from "../../Images/Icons/icon-graph-down.svg";
 import emptystar from "../../Images/Icons/icon-emptystar.svg";
 import fullstar from "../../Images/Icons/icon-fullstar.svg";
-
 import Image from "./Styled/Image";
 
 export const ImageLogo = styled(Image)`

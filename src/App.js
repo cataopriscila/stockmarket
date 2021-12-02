@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { createGlobalStyle } from "styled-components";
 import Menu from "./Components/Commons/Menu";
 import PageLayout from "./Components/Commons/PageLayout";
-import DashBoard from "./Components/Pages/DashBoard";
-import SideBoard from "./Components/Commons/SideBoard";
+import DashBoard from "./Components/Commons/DashBoard";
+import UserBoard from "./Components/Commons/UserBoard";
 import Alert from "./Components/Alert";
 
 require("dotenv").config();
@@ -26,85 +26,104 @@ const GlobalStyle = createGlobalStyle`
 const API_TOKEN = `${process.env.REACT_APP_API_KEY}`;
 
 function App() {
-  const [logo, setLogo] = useState('');
-  const [company, setCompany] = useState({}); 
-  const [alert, setAlert] = useState(''); 
-  const [alertDisplay, setAlertDisplay] = useState(false);
+  const [company, setCompany] = useState({});
+  const [alert, setAlert] = useState("");
+  const [alertDisplay, setAlertDisplay] = useState("none");
   const [favourites, setFavourites] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [recents, setRecents] = useState([]);
 
   const onSearchSubmit = async (symbol) => {
     try {
-      const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${symbol}/quote/latestprice?token=${API_TOKEN}`);
-      setCompany(response.data);
-      console.log(response.data);
-
-    } catch (error) {      
-      setCompany(error.response);
-    }   
-  }
-
-  const goBack = () => {
-    setAlert('');
-    setAlertDisplay(false);
-  } 
-
-  const addToFavourites = async () => {     
-    const {symbol, companyName, changePercent} = company;
-    try {
-      const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${company.symbol}/logo?token=${API_TOKEN}`);      
-      setLogo(response.data.url); 
-      if(changePercent){
-          if (favourites.some((obj) => obj.companyName === companyName)) {
-            setAlertDisplay(true);
-            setAlert('Stock already on your list of favourites')
-          } else {
-            setFavourites([...favourites, {logo, symbol, companyName, changePercent, id: favourites.length.toString()}]);
-          }
-      } else {
-          setAlertDisplay(true);
-          setAlert('Poor stock data. Find another symbol')
-      }
-    } catch (error) {      
-      console.log(error);
-    }     
-  };
-
-  const removeFavourites = (e) => {
-    if (favourites.some((obj) => e.target.id === obj.id)) {
-      favourites.splice(e.target.id, 1);
-      let updated = favourites.map((obj, i) =>
-        Object.assign({}, obj, { id: `${i}` })
+      const response = await axios.get(
+        `https://cloud.iexapis.com/stable/stock/${symbol}/quote/latestprice?token=${API_TOKEN}`
       );
-      setFavourites(updated);      
-      setIsDeleted(true);
+      setCompany(response.data);
+      
+    } catch (error) {
+      setCompany(error.response);
+      setAlert("Insert a valid NASDAQ symbol");
+      setAlertDisplay("block");
     }
   };
+
+  const goBack = () => {
+    setAlert("");
+    setAlertDisplay("none");
+  };
+
+  const addToFavourites = async () => {
+    const { symbol, companyName, changePercent } = company;
+    try {
+      const response = await axios.get(
+        `https://cloud.iexapis.com/stable/stock/${symbol}/logo?token=${API_TOKEN}`
+      );
+
+      if (changePercent) {
+        if (favourites.some((obj) => obj.companyName === companyName)) {
+          setAlert("Stock already on your list of favourites");
+          setAlertDisplay("block");
+        } else {
+          setFavourites([
+            ...favourites,
+            {
+              logo: response.data.url,
+              symbol,
+              companyName,
+              changePercent,
+              // id: favourites.length.toString(),
+            },
+          ]);
+        }
+      } else {
+        setAlertDisplay("block");
+        setAlert("Poor stock data. Insert another symbol");
+      }
+    } catch (error) {
+      console.log(error);
+    }   
+  };
+
+
+  const removeFavourites = (card) => {
+    let favUpdate = favourites.filter((obj)=> !(obj === card));
+    setFavourites(favUpdate);
+    }  
 
   const closeMessage = () => {
     setIsDeleted(false);
   };
 
-  const addFromRecents = (e) => {        
+  const addFromRecents = (e) => {
     recents.forEach((value, i) => {
-      if (parseInt(e.target.id) === i) { 
-            if(favourites.some((obj) => obj.companySymbol === value.companySymbol)) {
-            return false;          
-          } else {
-            return favourites.push(value);
-          }          
-        }     
-    })
+      if (parseInt(e.target.id) === i) {
+        if (
+          favourites.some((obj) => obj.companySymbol === value.companySymbol)
+        ) {
+          return false;
+        } else {
+          return favourites.push(value);
+        }
+      }
+    });
 
     setFavourites(favourites);
-    setCompany(Math.random());   
-    
-   
+    setCompany(Math.random());
   };
- 
-  useEffect(() => {    
-    let arrayOfSymbols = ["TSLA", 'AAPL', "BABA",'MSFT', 'SBUX', 'FB', 'DIS', 'NFLX','TWTR', 'JNJ'];
+
+  useEffect(() => {
+    let arrayOfSymbols = [
+      "TSLA",
+      "AAPL",
+      "BABA",
+      "MSFT",
+      "SBUX",
+      "FB",
+      "DIS",
+      "NFLX",
+      "TWTR",
+      "JNJ",
+    ];
 
     return arrayOfSymbols.forEach((value, i) => {
       fetch(
@@ -112,7 +131,7 @@ function App() {
       )
         .then((response) => response.json())
         .then((data) => {
-          let logo = {logo: data.url};
+          let logo = { logo: data.url };
           fetch(
             `https://cloud.iexapis.com/stable/stock/${value}/quote/latestprice?token=${API_TOKEN}`
           )
@@ -129,27 +148,25 @@ function App() {
             .catch((err) => console.log(err));
         })
         .catch((err) => console.log(err));
-    });    
+    });
   }, []);
-  
+
   return (
     <>
       <GlobalStyle />
-      <Alert alert={alert}
-             alertDisplay={alertDisplay}
-             goBack={goBack}
-      />
+
+      <Alert alert={alert} alertDisplay={alertDisplay} goBack={goBack} />
       <PageLayout>
-        <Menu/>
+        <Menu />
         <DashBoard
-          company={company}          
-          onSearchSubmit={onSearchSubmit}          
+          company={company}
+          onSearchSubmit={onSearchSubmit}
           addToFavourites={addToFavourites}
           addFromRecents={addFromRecents}
-          recents={recents}          
-          apikey={API_TOKEN}          
+          recents={recents}
+          apikey={API_TOKEN}
         />
-        <SideBoard
+        <UserBoard
           favourites={favourites}
           removeFavourites={removeFavourites}
           isDeleted={isDeleted}
