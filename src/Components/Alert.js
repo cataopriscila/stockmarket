@@ -9,7 +9,7 @@ const StyledAlert = styled.div`
     position: absolute;          
     z-index: 6;
     background-color: rgba(0,0,0, 0.6); 
-    display: ${props => props.display? 'block': 'none'};
+    display: ${props => props.display};
     transition: all 1s;
 `;
 
@@ -26,12 +26,11 @@ const StyledAlertMessage = styled(FontStyle)`
     cursor: pointer;   
 `;
 
-const Alert = ({alert, alertDisplay, goBack}) => { 
-
+const Alert = ({alert, alertDisplay, goBack}) => {
      
     return (
         <StyledAlert display={alertDisplay}>
-        <StyledAlertMessage onClick={goBack}>{`${alert}  ⟲`}</StyledAlertMessage>                        
+        <StyledAlertMessage onClick={goBack}>{alert}{'   '}{'⟲'}</StyledAlertMessage>                        
         </StyledAlert>
     );
 }

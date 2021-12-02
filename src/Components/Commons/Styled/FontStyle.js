@@ -14,6 +14,7 @@ const FontStyle = styled.h4`
     font-weight: 400;
     font-size: 1.4rem;
     line-height: 1.4rem;
+    display: inline-block;
     color: #657786; 
     `}
     `;
