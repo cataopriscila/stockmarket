@@ -1,5 +1,3 @@
-// font-family: 'Montserrat', sans-serif;
-
 import styled from "styled-components";
 import Image from './Styled/Image';
 import Card from './Styled/Card';
@@ -35,8 +33,12 @@ export const FavouriteCardsWrapper = styled.div`
 `;
 
 
-const FavouriteCard = ({card, removeFavourites}) => { 
-  const {logo, companySymbol, companyName, changePercent} = card;
+const FavouriteCard = ({favouriteCard, removeFromFavourites}) => { 
+  const {logo, companySymbol, companyName, changePercent} = favouriteCard;
+
+  const handleTrashClick = (e) => {
+    removeFromFavourites(favouriteCard);    
+  }
    
     return (
     <>
@@ -63,7 +65,7 @@ const FavouriteCard = ({card, removeFavourites}) => {
         trash
         src={trash}
         alt='trash'        
-        onClick={() => removeFavourites(card)}           
+        onClick={handleTrashClick}           
         />
     </FavouriteCardsWrapper>          
     </>
@@ -72,39 +74,3 @@ const FavouriteCard = ({card, removeFavourites}) => {
 
 export default FavouriteCard;
 
-// const FavouriteCard = ({logo, companySymbol, companyName, removeFavourites, id, changePercent}) => { 
-//   let upOrDown = Math.sign(changePercent);   
-//     return (
-//     <>
-//     <FavouriteCardsWrapper>
-//       <Card favourite>
-//         <ImageLogo src={logo} alt='logo' />
-//         <CompanyInfo>            
-//             <FontStyle symbol>{companySymbol}</FontStyle>
-//             <FontStyle>{companyName}</FontStyle> 
-//         </CompanyInfo> 
-//         {changePercent?(
-//           <CompanyValues> 
-//         {upOrDown === -1 || upOrDown === -0? 
-//             (<FontValues>{`${changePercent}%`}</FontValues>)   
-//            :(<FontValues up>{`+${changePercent}%`}</FontValues>)                   
-//         }  
-//         <img src={upOrDown === -1 || upOrDown === -0? graphdown : graphup} alt='rate'/>      
-//         </CompanyValues>
-//         ) : 
-//         (<FontValues>no data</FontValues>)
-//         }                                
-//       </Card>
-//       <Image
-//         trash
-//         src={trash}
-//         alt='trash'
-//         id={id}
-//         onClick={removeFavourites}           
-//         />
-//     </FavouriteCardsWrapper>          
-//     </>
-//   );
-// };
-
-// export default FavouriteCard;

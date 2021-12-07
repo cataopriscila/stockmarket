@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Carousel from "./Carousel";
 import GraphArea from "./GraphArea";
@@ -23,29 +23,13 @@ const DashBoard = ({
   company,  
   onSearchSubmit,  
   addToFavourites,
-  addFromRecents,
+  addFromRecents, 
   recents,  
-  apikey  
+  apikey,
   
 }) => {
 
-  const [slide, setSlide] = useState(0);  
-  const slideForward = (e) => {
-    if(slide < 0) {
-      setSlide(slide+100)
-      } else { e.preventDefault();
-       }
-    
-  }
-  const slideBack = (e) => {    
-     if(slide > -3000) {
-      setSlide(slide-100)
-    } else {
-      e.preventDefault();
-    }    
-  }
-
-  return (
+   return (
     <DashBoardWrapper>
       <Header title="Dashboard" />
       <Searchbar
@@ -58,12 +42,9 @@ const DashBoard = ({
       />
        <Carousel
        subtitle="Recent Companies"
+       apikey={apikey}
        recents={recents}
-       addFromRecents={addFromRecents}
-       transform={slide}
-       slideForward={slideForward}
-       slideBack={slideBack}
-       
+       addFromRecents={addFromRecents}                
        />  
     </DashBoardWrapper>
   );

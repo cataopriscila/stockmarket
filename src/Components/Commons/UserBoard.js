@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BoardList from "./UserList";
+import UserList from "./UserList";
 import UserProfile from "./UserProfile";
 
 const UserBoardWrapper = styled.div`
@@ -17,14 +17,15 @@ const UserBoardWrapper = styled.div`
     }
 `;
 
-const UserBoard = ({favourites, removeFavourites}) => {
+const UserBoard = ({favourites, removeFromFavourites, unfavouriteRecents}) => {
   return (
     <UserBoardWrapper>
       <UserProfile />
-      <BoardList        
+      <UserList        
         subtitle="Favourite companies"
         favourites={favourites}        
-        removeFavourites={removeFavourites}               
+        removeFromFavourites={removeFromFavourites} 
+        unfavouriteRecents={unfavouriteRecents}              
         />
     </UserBoardWrapper>
   );

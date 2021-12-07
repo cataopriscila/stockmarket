@@ -1,5 +1,3 @@
-// import React, { useState } from "react";
-import { useState } from "react";
 import styled, { css } from "styled-components";
 import Card from "./Styled/Card";
 import FontStyle from "./Styled/FontStyle";
@@ -9,21 +7,23 @@ import graphdown from "../../Images/Icons/icon-graph-down.svg";
 import emptystar from "../../Images/Icons/icon-emptystar.svg";
 import fullstar from "../../Images/Icons/icon-fullstar.svg";
 import Image from "./Styled/Image";
+import { useState } from "react";
 
 export const ImageLogo = styled(Image)`
   border-radius: 50%;
 
   ${(props) =>
-    props.recent
+    props.favourite
       ? css`
-          width: 3.6rem;
-          height: 3.6rem;
-          border: 0.4rem solid #a9adb180;
-        `
-      : css`
           width: 4.5rem;
           height: 4.5rem;
           position: absolute;
+        `
+      : css`          
+
+          width: 3.6rem;
+          height: 3.6rem;
+          border: 0.4rem solid #a9adb180;
         `}
 `;
 
@@ -39,43 +39,44 @@ export const CompanyValues = styled.div`
   gap: 0.5rem;
 `;
 
-const RecentCard = (props) => {
-  const { companySymbol, companyName, changePercent, addFromRecents, id } =
-    props;
-  let upOrDown = Math.sign(changePercent);
+const RecentCard = ({recentCard, addFromRecents,  ...props}) => {
+  const {logo, symbol, companyName, changePercent } = recentCard; 
 
-  const [isFavouriteStar, setIsFavouriteStar] = useState(false);
+  const [isStarClicked, setIsStarClicked] = useState(false); 
 
-  const changeStar = (e) => {
-    if (parseInt(e.target.id) === id) {
-      setIsFavouriteStar(true);
-    }
-  };
-
+  const toggleStar = () => {
+    setIsStarClicked(s => !s);    
+  }
+  
+  const handleStarClick = (e) => {
+    addFromRecents(recentCard, e);            
+    return e.defaultPrevented? null : toggleStar();    
+  } 
+    
   return (
-    <Card onClick={changeStar} {...props}>
-      <Image
-        id={id}
+    <Card  {...props}>
+      <Image        
         style={{ cursor: "pointer" }}
-        src={isFavouriteStar ? fullstar : emptystar}
+        src={isStarClicked ? fullstar : emptystar}
         alt="empty-star"
-        onClick={addFromRecents}
+        onClick={handleStarClick}
+        {...props}
       />
 
-      <ImageLogo recent {...props} />
-      <CompanyInfo>
-        <FontStyle symbol>{companySymbol}</FontStyle>
+      <ImageLogo src={logo} alt='logo' {...props}/>
+      <CompanyInfo {...props}>
+        <FontStyle symbol>{symbol}</FontStyle>
         <FontStyle>{companyName}</FontStyle>
       </CompanyInfo>
 
       <CompanyValues>
-        {upOrDown === -1 || upOrDown === -0 ? (
+        {changePercent < 0 ? (
           <FontValues>{`${changePercent}%`}</FontValues>
         ) : (
           <FontValues up>{`+${changePercent}%`}</FontValues>
         )}
         <img
-          src={upOrDown === -1 || upOrDown === -0 ? graphdown : graphup}
+          src={changePercent < 0 ? graphdown : graphup}
           alt="rate"
         />
       </CompanyValues>

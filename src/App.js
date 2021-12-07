@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { createGlobalStyle } from "styled-components";
 import Menu from "./Components/Commons/Menu";
@@ -29,8 +29,7 @@ function App() {
   const [company, setCompany] = useState({});
   const [alert, setAlert] = useState("");
   const [alertDisplay, setAlertDisplay] = useState("none");
-  const [favourites, setFavourites] = useState([]);  
-  const [recents, setRecents] = useState([]);
+  const [favourites, setFavourites] = useState([]);
 
   const onSearchSubmit = async (symbol) => {
     try {
@@ -38,7 +37,6 @@ function App() {
         `https://cloud.iexapis.com/stable/stock/${symbol}/quote/latestprice?token=${API_TOKEN}`
       );
       setCompany(response.data);
-      
     } catch (error) {
       setCompany(error.response);
       setAlert("Insert a valid NASDAQ symbol");
@@ -59,7 +57,7 @@ function App() {
       );
 
       if (changePercent) {
-        if (favourites.some(obj => obj.companyName === companyName)) {
+        if (favourites.some((obj) => obj.companyName === companyName)) {
           setAlert("Stock is already on your list of favourites");
           setAlertDisplay("block");
         } else {
@@ -70,9 +68,9 @@ function App() {
               symbol,
               companyName,
               changePercent,
-              // id: favourites.length.toString(),
             },
           ]);
+          console.log(favourites);
         }
       } else {
         setAlertDisplay("block");
@@ -80,73 +78,24 @@ function App() {
       }
     } catch (error) {
       console.log(error);
-    }   
+    }
   };
 
-
-  const removeFavourites = (card) => {
-    let favUpdate = favourites.filter(obj => !(obj === card));
+  const removeFromFavourites = (card) => {
+    let favUpdate = favourites.filter((obj) => !(obj === card));
     setFavourites(favUpdate);
-    }  
-
- 
-  const addFromRecents = (e) => {
-    recents.forEach((value, i) => {
-      if (parseInt(e.target.id) === i) {
-        if (
-          favourites.some((obj) => obj.companySymbol === value.companySymbol)
-        ) {
-          return false;
-        } else {
-          return favourites.push(value);
-        }
-      }
-    });
-
-    setFavourites(favourites);
-    setCompany(Math.random());
-    
   };
 
-  useEffect(() => {
-    let arrayOfSymbols = [
-      "TSLA",
-      "AAPL",
-      "BABA",
-      "MSFT",
-      "SBUX",
-      "FB",
-      "DIS",
-      "NFLX",
-      "TWTR",
-      "JNJ",
-    ];
-
-    return arrayOfSymbols.forEach((value, i) => {
-      fetch(
-        `https://cloud.iexapis.com/stable/stock/${value}/logo?token=${API_TOKEN}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          let logo = { logo: data.url };
-          fetch(
-            `https://cloud.iexapis.com/stable/stock/${value}/quote/latestprice?token=${API_TOKEN}`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              let companyData = {
-                companySymbol: value,
-                companyName: data.companyName,
-                changePercent: data.changePercent,
-                id: `${i}`,
-              };
-              setRecents((prev) => prev.concat({ ...logo, ...companyData }));
-            })
-            .catch((err) => console.log(err));
-        })
-        .catch((err) => console.log(err));
-    });
-  }, []);
+  const addFromRecents = (card, e) => {
+    const { companyName } = card;
+    if (favourites.some((obj) => obj.companyName === companyName)) {
+      e.preventDefault();
+      setAlert("Stock is already on your list of favourites");
+      setAlertDisplay("block");
+    } else {
+      setFavourites([...favourites, card]);
+    }
+  };
 
   return (
     <>
@@ -160,12 +109,11 @@ function App() {
           onSearchSubmit={onSearchSubmit}
           addToFavourites={addToFavourites}
           addFromRecents={addFromRecents}
-          recents={recents}
           apikey={API_TOKEN}
         />
         <UserBoard
           favourites={favourites}
-          removeFavourites={removeFavourites}          
+          removeFromFavourites={removeFromFavourites}
         />
       </PageLayout>
     </>

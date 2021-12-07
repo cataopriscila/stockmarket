@@ -5,7 +5,7 @@ import SubTitle from "./Styled/SubTitle";
 import FavouriteCard from "./FavouriteCard";
 import { Fragment } from "react";
 
-const UserList = ({ subtitle, favourites, removeFavourites }) => {
+const UserList = ({ subtitle, favourites, removeFromFavourites }) => {
 
   return (
     <>
@@ -15,7 +15,7 @@ const UserList = ({ subtitle, favourites, removeFavourites }) => {
       </HeaderWrapper>
       {favourites.map((card, i) => (
         <Fragment key={i}>
-          <FavouriteCard card={card} removeFavourites={removeFavourites} />
+          <FavouriteCard favouriteCard={card} removeFromFavourites={removeFromFavourites} />
         </Fragment>
       ))}
     </>

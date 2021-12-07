@@ -1,8 +1,7 @@
-import React from "react";
+import React, {Fragment, useState, useEffect} from "react";
 import styled from "styled-components";
 import ButtonForward from "../../Images/Icons/icon-button-forward.svg";
 import ButtonBack from "../../Images/Icons/icon-button-back.svg";
-
 import HeaderWrapper from "./Styled/HeaderWrapper";
 import Image from "./Styled/Image";
 import SubTitle from "./Styled/SubTitle";
@@ -53,13 +52,72 @@ const Flex = styled.div`
   width: 100%; 
   max-width: 130rem; 
   transition: all 1s;
-  transform: translateX(${props => props.transform}px);
-  
+  transform: translateX(${props => props.transform}px); 
   
 `;
 
-const Carousel = (props) => {
-  const { subtitle, recents, addFromRecents, slideForward, slideBack } = props;
+const Carousel = ({ subtitle, addFromRecents, apikey }) => {
+  const [slide, setSlide] = useState(0); 
+  const [recents, setRecents] = useState([]); 
+
+  const slideForward = (e) => {
+    if(slide < 0) {
+      setSlide(slide+100)
+      } else { e.preventDefault();}    
+  }
+  
+  const slideBack = (e) => {    
+     if(slide > -3000) {
+      setSlide(slide-100)
+    } else { e.preventDefault(); }    
+  }
+
+  // const unfavouriteRecents = (card) => {
+  //   const recUpdated = recents.filter(obj => !(obj === card))
+  //   setRecents(recUpdated);
+  // }
+
+  useEffect(() => {
+    let arrayOfSymbols = [
+      "TSLA",
+      "AAPL",
+      "BABA",
+      "MSFT",
+      "SBUX",
+      "FB",
+      "DIS",
+      "NFLX",
+      "TWTR",
+      "JNJ",
+    ];
+
+    arrayOfSymbols.forEach((value,i) => {      
+      fetch(
+        `https://cloud.iexapis.com/stable/stock/${value}/logo?token=${apikey}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          let logo = { logo: data.url };
+          fetch(
+            `https://cloud.iexapis.com/stable/stock/${value}/quote/latestprice?token=${apikey}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              let companyData = {
+                symbol: value,
+                companyName: data.companyName,
+                changePercent: data.changePercent,
+                id: i,                
+              };
+              setRecents(prev => prev.concat({ ...logo, ...companyData }));
+              
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+    });    
+    
+  },[]);
   
   return (
     <>
@@ -72,26 +130,13 @@ const Carousel = (props) => {
             <SlideButton onClick={slideBack} src={ButtonBack} alt="btn" />
           </SlideController>
           </HeaderWrapper>
-        <CarouselSpreader>
-        <Flex {...props}>
+        <CarouselSpreader>        
+        <Flex transform={slide}>
           {!recents.length ? (
             <FontStyle symbol>LOADING</FontStyle>
-          ) : (
-            recents.map((value, i) => {
-              return (
-                <RecentCard
-                  addFromRecents={addFromRecents}                                 
-                  src={recents[i].logo}
-                  companySymbol={recents[i].companySymbol}
-                  companyName={recents[i].companyName}
-                  changePercent={recents[i].changePercent}
-                  symbol
-                  key={i}
-                  id={i}
-                />
-              );
-            })
-          )}         
+          ) : 
+          (recents.map((card, i) => <Fragment key={i}><RecentCard recentCard={card} addFromRecents={addFromRecents} /></Fragment>))          
+          }         
         </Flex>
         </CarouselSpreader>
       </CarouselWrapper>
