@@ -11,6 +11,10 @@ const UserBoardWrapper = styled.div`
   padding: 3.6rem 2rem;
   position: relative;
   z-index: 2;
+
+  @media(min-width:1440px)
+    {   padding: 3.6rem 4rem;       
+    }
 `;
 
 const UserBoard = ({favourites, removeFavourites}) => {

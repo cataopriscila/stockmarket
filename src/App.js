@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Raleway', sans-serif;
 
     @media(min-width:1440px) {
-      font-size: 220%;
+      font-size: 12px;      
     }
   }
 `;
@@ -29,8 +29,7 @@ function App() {
   const [company, setCompany] = useState({});
   const [alert, setAlert] = useState("");
   const [alertDisplay, setAlertDisplay] = useState("none");
-  const [favourites, setFavourites] = useState([]);
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [favourites, setFavourites] = useState([]);  
   const [recents, setRecents] = useState([]);
 
   const onSearchSubmit = async (symbol) => {
@@ -60,8 +59,8 @@ function App() {
       );
 
       if (changePercent) {
-        if (favourites.some((obj) => obj.companyName === companyName)) {
-          setAlert("Stock already on your list of favourites");
+        if (favourites.some(obj => obj.companyName === companyName)) {
+          setAlert("Stock is already on your list of favourites");
           setAlertDisplay("block");
         } else {
           setFavourites([
@@ -86,14 +85,11 @@ function App() {
 
 
   const removeFavourites = (card) => {
-    let favUpdate = favourites.filter((obj)=> !(obj === card));
+    let favUpdate = favourites.filter(obj => !(obj === card));
     setFavourites(favUpdate);
     }  
 
-  const closeMessage = () => {
-    setIsDeleted(false);
-  };
-
+ 
   const addFromRecents = (e) => {
     recents.forEach((value, i) => {
       if (parseInt(e.target.id) === i) {
@@ -109,6 +105,7 @@ function App() {
 
     setFavourites(favourites);
     setCompany(Math.random());
+    
   };
 
   useEffect(() => {
@@ -168,9 +165,7 @@ function App() {
         />
         <UserBoard
           favourites={favourites}
-          removeFavourites={removeFavourites}
-          isDeleted={isDeleted}
-          closeMessage={closeMessage}
+          removeFavourites={removeFavourites}          
         />
       </PageLayout>
     </>

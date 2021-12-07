@@ -12,6 +12,11 @@ const DashBoardWrapper = styled.section`
   flex-direction: column;
   height: 80.1rem;
   padding: 0 2rem;
+
+  @media(min-width:1440px)
+    {     
+        padding: 0 4rem;       
+    }
 `;
 
 const DashBoard = ({
@@ -33,7 +38,6 @@ const DashBoard = ({
     
   }
   const slideBack = (e) => {    
-    
      if(slide > -3000) {
       setSlide(slide-100)
     } else {

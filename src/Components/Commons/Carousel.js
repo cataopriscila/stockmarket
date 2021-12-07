@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import ButtonForward from "../../Images/Icons/icon-button-forward.svg";
 import ButtonBack from "../../Images/Icons/icon-button-back.svg";
-// import Card from './Card';
+
 import HeaderWrapper from "./Styled/HeaderWrapper";
 import Image from "./Styled/Image";
 import SubTitle from "./Styled/SubTitle";
 import stats from "../../Images/Icons/icon-stats.svg";
 import { HeaderSpreader } from "./GraphArea";
-import GeneralCard from "./RecentCard";
+import RecentCard from "./RecentCard";
 import FontStyle from "./Styled/FontStyle";
 
 
@@ -28,6 +28,9 @@ const SlideController = styled.div`
   display: flex;
   margin-left: 36rem;
 
+  @media (min-width: 1440px) {
+    margin-left: auto;
+  }
 `;
 
 const CarouselSpreader = styled(HeaderSpreader)`
@@ -56,9 +59,7 @@ const Flex = styled.div`
 `;
 
 const Carousel = (props) => {
-
   const { subtitle, recents, addFromRecents, slideForward, slideBack } = props;
-
   
   return (
     <>
@@ -78,7 +79,7 @@ const Carousel = (props) => {
           ) : (
             recents.map((value, i) => {
               return (
-                <GeneralCard
+                <RecentCard
                   addFromRecents={addFromRecents}                                 
                   src={recents[i].logo}
                   companySymbol={recents[i].companySymbol}

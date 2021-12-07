@@ -37,7 +37,7 @@ export const FavouriteCardsWrapper = styled.div`
 
 const FavouriteCard = ({card, removeFavourites}) => { 
   const {logo, companySymbol, companyName, changePercent} = card;
-  // let upOrDown = Math.sign(changePercent);   
+   
     return (
     <>
     <FavouriteCardsWrapper>

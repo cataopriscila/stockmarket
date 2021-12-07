@@ -39,7 +39,7 @@ export const CompanyValues = styled.div`
   gap: 0.5rem;
 `;
 
-const GeneralCard = (props) => {
+const RecentCard = (props) => {
   const { companySymbol, companyName, changePercent, addFromRecents, id } =
     props;
   let upOrDown = Math.sign(changePercent);
@@ -83,4 +83,4 @@ const GeneralCard = (props) => {
   );
 };
 
-export default GeneralCard;
+export default RecentCard;

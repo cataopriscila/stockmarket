@@ -2,8 +2,7 @@ import React from 'react';
 import styled, {css} from 'styled-components';
 
 const Content = styled.section`
-    display: grid;
-    overflow: hidden; 
+    display: grid;    
     width: 128rem; 
     
     ${props => props.menuTop? css`
@@ -32,8 +31,7 @@ const Content = styled.section`
     ` : css`
         grid-template-columns: 9.6rem 1fr 39.4rem;
         grid-template-rows: 100vh;    
-    `}; 
-          
+    `};          
     }
 `;
 
