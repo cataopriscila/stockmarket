@@ -24,8 +24,7 @@ const DashBoard = ({
   onSearchSubmit,  
   addToFavourites,
   addFromRecents, 
-  recents,  
-  apikey,
+  recents, 
   
 }) => {
 
@@ -37,14 +36,13 @@ const DashBoard = ({
       />
       <GraphArea
         company={company}        
-        addToFavourites={addToFavourites}
-        apikey={apikey}
+        addToFavourites={addToFavourites}        
       />
        <Carousel
-       subtitle="Recent Companies"
-       apikey={apikey}
+       subtitle="Recent Companies"       
        recents={recents}
-       addFromRecents={addFromRecents}                
+       addFromRecents={addFromRecents}
+                      
        />  
     </DashBoardWrapper>
   );

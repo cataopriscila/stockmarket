@@ -39,13 +39,13 @@ export const CompanyValues = styled.div`
   gap: 0.5rem;
 `;
 
-const RecentCard = ({recentCard, addFromRecents,  ...props}) => {
+const RecentCard = ({recentCard, addFromRecents, ...props}) => {
   const {logo, symbol, companyName, changePercent } = recentCard; 
 
-  const [isStarClicked, setIsStarClicked] = useState(false); 
+  const [isStarClicked, setIsStarClicked] = useState(false);   
 
   const toggleStar = () => {
-    setIsStarClicked(s => !s);    
+    setIsStarClicked(s => !s);      
   }
   
   const handleStarClick = (e) => {
@@ -57,7 +57,7 @@ const RecentCard = ({recentCard, addFromRecents,  ...props}) => {
     <Card  {...props}>
       <Image        
         style={{ cursor: "pointer" }}
-        src={isStarClicked ? fullstar : emptystar}
+        src={isStarClicked? fullstar : emptystar}
         alt="empty-star"
         onClick={handleStarClick}
         {...props}

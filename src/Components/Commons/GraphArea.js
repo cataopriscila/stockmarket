@@ -82,7 +82,7 @@ export const FontValues = styled(FontStyle)`
   color: ${(props) => (props.up ? "#79C300" : "#D64B45")};
 `;
 
-const GraphArea = ({ company, addToFavourites, apikey }) => {
+const GraphArea = ({ company, addToFavourites }) => {
   const { symbol, companyName, change, latestPrice, changePercent } = company;
 
   return (
@@ -115,7 +115,7 @@ const GraphArea = ({ company, addToFavourites, apikey }) => {
           )}
         </GraphStockValues>
       </HeaderSpreader>
-      <GraphChart apikey={apikey} companySymbol={symbol} />
+      <GraphChart companySymbol={symbol} />
     </GraphWrapper>
   );
 };

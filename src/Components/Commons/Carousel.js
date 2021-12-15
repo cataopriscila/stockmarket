@@ -1,4 +1,5 @@
 import React, {Fragment, useState, useEffect} from "react";
+import iex from '../../api/iex';
 import styled from "styled-components";
 import ButtonForward from "../../Images/Icons/icon-button-forward.svg";
 import ButtonBack from "../../Images/Icons/icon-button-back.svg";
@@ -56,7 +57,7 @@ const Flex = styled.div`
   
 `;
 
-const Carousel = ({ subtitle, addFromRecents, apikey }) => {
+const Carousel = ({ subtitle, addFromRecents, wasNotRemoved }) => {
   const [slide, setSlide] = useState(0); 
   const [recents, setRecents] = useState([]); 
 
@@ -72,11 +73,7 @@ const Carousel = ({ subtitle, addFromRecents, apikey }) => {
     } else { e.preventDefault(); }    
   }
 
-  // const unfavouriteRecents = (card) => {
-  //   const recUpdated = recents.filter(obj => !(obj === card))
-  //   setRecents(recUpdated);
-  // }
-
+ 
   useEffect(() => {
     let arrayOfSymbols = [
       "TSLA",
@@ -91,31 +88,26 @@ const Carousel = ({ subtitle, addFromRecents, apikey }) => {
       "JNJ",
     ];
 
-    arrayOfSymbols.forEach((value,i) => {      
-      fetch(
-        `https://cloud.iexapis.com/stable/stock/${value}/logo?token=${apikey}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          let logo = { logo: data.url };
-          fetch(
-            `https://cloud.iexapis.com/stable/stock/${value}/quote/latestprice?token=${apikey}`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              let companyData = {
-                symbol: value,
-                companyName: data.companyName,
-                changePercent: data.changePercent,
-                id: i,                
-              };
-              setRecents(prev => prev.concat({ ...logo, ...companyData }));
-              
-            })
-            .catch((err) => console.log(err));
-        })
-        .catch((err) => console.log(err));
-    });    
+    arrayOfSymbols.forEach( async (value,i) => { 
+
+      try {
+        const responseLogo = await iex.get(`/${value}/logo`);
+      let logo = { logo: responseLogo.data.url };
+      
+      const responseData = await iex.get(`/${value}/quote`);
+      let companyData = {
+                    symbol: value,
+                    companyName: responseData.data.companyName,
+                    changePercent: responseData.data.changePercent,
+                    id: i,                
+                  };
+
+      setRecents(prev => prev.concat({ ...logo, ...companyData }));
+      } catch(err){
+      setRecents([]);
+      }
+      
+    })     
     
   },[]);
   
