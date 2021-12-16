@@ -23,32 +23,21 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [name, setName] = useState('');
-
-  // const toSetName = (user) => {
-  //   setName(user);
-  // }
-
+  const [name, setName] = useState("");
+  
   return (
     <>
-      <GlobalStyle />      
+      <GlobalStyle />
       <BrowserRouter>
-      <Switch>
-      <Route path="/home">
-         <Home username={name}/>
-      </Route>
-      <Route path="/">        
-      <Access setName={setName} />
-      </Route>
-      
-
-     
-      
-
-      </Switch>
-        
+        <Switch>
+          <Route path="/home">
+            <Home username={name} />
+          </Route>
+          <Route path="/">
+            <Access setName={setName} />
+          </Route>
+        </Switch>
       </BrowserRouter>
-      
     </>
   );
 }
