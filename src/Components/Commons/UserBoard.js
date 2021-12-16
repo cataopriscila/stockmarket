@@ -17,10 +17,10 @@ const UserBoardWrapper = styled.div`
     }
 `;
 
-const UserBoard = ({favourites, removeFromFavourites, unfavouriteRecents}) => {
+const UserBoard = ({username, favourites, removeFromFavourites, unfavouriteRecents}) => {
   return (
     <UserBoardWrapper>
-      <UserProfile />
+      <UserProfile username={username} />
       <UserList        
         subtitle="Favourite companies"
         favourites={favourites}        

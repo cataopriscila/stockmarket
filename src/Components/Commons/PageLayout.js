@@ -3,8 +3,7 @@ import styled, {css} from 'styled-components';
 
 const Content = styled.section`
     display: grid;    
-    width: 128rem; 
-    
+    width: 128rem;      
     ${props => props.menuTop? css`
         grid-template-columns: 88.6rem 39.4rem;
         grid-template-rows: 9.6rem 1fr;
@@ -14,8 +13,8 @@ const Content = styled.section`
         } 
 
     ` : css`
-        grid-template-columns: 9.6rem 78.9rem 39.4rem;
-        grid-template-rows: 80.1rem;    
+        grid-template-columns: 9.6rem 78.9rem 39.4rem; 
+        grid-template-rows: ${props => props.access? '100vh': '80.1rem'};    
     `};
     
     @media(min-width:1440px)
@@ -29,15 +28,15 @@ const Content = styled.section`
         } 
 
     ` : css`
-        grid-template-columns: 9.6rem 1fr 39.4rem;
+        grid-template-columns: ${props => props.access? '9.6rem 123rem 39.4rem': '9.6rem 1fr 39.4rem'}; 
         grid-template-rows: 100vh;    
     `};          
     }
 `;
 
-const PageLayout = ({children, menuTop}) => {
+const PageLayout = ({children, menuTop, access}) => {
     return (
-        <Content menuTop={menuTop}>
+        <Content menuTop={menuTop} access={access}>
             {children}            
         </Content>        
         

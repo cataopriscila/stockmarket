@@ -32,12 +32,12 @@ const UserName = styled(FontStyle)`
     text-align: center;    
 `;
 
-const UserProfile = () => {
+const UserProfile = ({username}) => {
     return (
         <>
         <UserProfileWrapper>
            <Image avatar src={avatar} alt=''/>
-            <UserName>João da Silva Almeida Magalhães</UserName>
+            <UserName>{username}</UserName>
             <Image icon src={chevrondown}/> 
         </UserProfileWrapper>
         

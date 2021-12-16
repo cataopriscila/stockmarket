@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import FontStyle from './Commons/Styled/FontStyle';
+import FontStyle from './Styled/FontStyle';
 
 
 const StyledAlert = styled.div`
