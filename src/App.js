@@ -5,10 +5,21 @@ import Home from "./Pages/Home";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import { useState } from "react";
+import PageLayout from "./Components/Commons/PageLayout";
+import Menu from "./Components/Commons/Menu";
 
 // require("dotenv").config();
 
 const GlobalStyle = createGlobalStyle`
+
+html {
+  font-size: 10px; 
+
+  @media(min-width:1440px) {
+      font-size: 11px;      
+    }   
+}
+
   body{    
     min-height: 100vh;           
     margin: 0;
@@ -16,9 +27,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;    
     font-family: 'Raleway', sans-serif;
 
-    @media(min-width:1440px) {
-      font-size: 12px;      
-    }
+    
   }
 `;
 
@@ -28,7 +37,9 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter>
+      <PageLayout>      
+        <BrowserRouter>
+        <Menu />
         <Switch>
           <Route path="/home">
             <Home username={name} />
@@ -38,6 +49,7 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
+      </PageLayout>      
     </>
   );
 }

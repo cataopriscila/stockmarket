@@ -8,8 +8,7 @@ import Button from "./Styled/Button";
 
 import Input from "./Styled/Input";
 
-const LoginWrapper = styled.div`
-  
+const LoginWrapper = styled.div`  
   align-self: center;  
   margin: 0 auto;
   padding: 2rem 4rem;
@@ -20,20 +19,16 @@ const LoginWrapper = styled.div`
 
 const Login = ({setName}) => {
 
-    const [input, setInput] = useState('');    
-
+    const [input, setInput] = useState('');
    
   return (
     <LoginWrapper>
-      <Header title="Login" />
-      <SearchbarWrapper>
-        <div style={{ display: "block" }}>
+      <Header title="Easy Login" />
+      <SearchbarWrapper>        
           <Input type="text" placeholder="Enter your name" onChange={(e)=> setInput(e.target.value)} value={input} />
           <Link to="/home">
-             <Button type="button" onClick={() => setName(input)}>Login</Button> 
-          </Link>
-          
-        </div>
+             <Button type="button" onClick={()=> setName(input)}>Go to Dashboard</Button> 
+          </Link>       
       </SearchbarWrapper>
     </LoginWrapper>
   );

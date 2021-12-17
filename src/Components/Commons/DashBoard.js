@@ -5,7 +5,9 @@ import GraphArea from "./GraphArea";
 import Header from "./Header";
 import Searchbar from "./SearchBar";
 
-const DashBoardWrapper = styled.section`
+const DashBoardWrapper = styled.div` 
+  
+  max-width: 78rem;
   background-color: #f5f8fa;
   border-top-left-radius: 2.4rem;  
   display: flex;
@@ -14,8 +16,8 @@ const DashBoardWrapper = styled.section`
   padding: 0 2rem;
 
   @media(min-width:1440px)
-    {     
-        padding: 0 4rem;       
+    {   padding: 0 4rem; 
+        max-width: 115rem;        
     }
 `;
 

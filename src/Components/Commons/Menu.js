@@ -9,7 +9,7 @@ const MenuWrapper = styled.nav`
   display: block;
   background-color: white;
   position: relative;
-  z-index: 2;
+  z-index: 2;  
 `;
 
 const Menu = () => {

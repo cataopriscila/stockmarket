@@ -12,8 +12,8 @@ import RecentCard from "./RecentCard";
 import FontStyle from "./Styled/FontStyle";
 
 
-const CarouselWrapper = styled.div`
-  width: 115rem;
+const CarouselWrapper = styled.div`  
+  width: 100%;
   height: 26.5rem;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,6 @@ const SlideButton = styled.img`
   height: 1.2rem;
   border-radius: 0.5rem;
   cursor: pointer;
-
 `;
 
 const Flex = styled.div`
@@ -57,7 +56,7 @@ const Flex = styled.div`
   
 `;
 
-const Carousel = ({ subtitle, addFromRecents, wasNotRemoved }) => {
+const Carousel = ({ subtitle, addFromRecents }) => {
   const [slide, setSlide] = useState(0); 
   const [recents, setRecents] = useState([]); 
 

@@ -56,13 +56,14 @@ const GraphWrapper = styled.div`
 export const HeaderSpreader = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1.5rem;
 `;
 
 const GraphName = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 40rem;
+  max-width: 45rem;
   height: 5rem;
   margin-top: 2.7rem;
   margin-left: 5.3rem;

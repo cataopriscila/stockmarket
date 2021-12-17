@@ -59,7 +59,7 @@ const GraphChart = ({ companySymbol }) => {
       <div
         style={{
           position: "absolute",
-          top: "35.5rem",
+          top: "37rem",
           left: "2rem",
           zIndex: "5",
         }}

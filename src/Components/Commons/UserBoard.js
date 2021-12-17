@@ -8,13 +8,9 @@ const UserBoardWrapper = styled.div`
   display: inline-block;
   width: 35.4rem;
   height: 72.9em;
-  padding: 3.6rem 2rem;
+  padding: 3.6rem 1.5rem;
   position: relative;
-  z-index: 2;
-
-  @media(min-width:1440px)
-    {   padding: 3.6rem 4rem;       
-    }
+  z-index: 2;  
 `;
 
 const UserBoard = ({username, favourites, removeFromFavourites, unfavouriteRecents}) => {

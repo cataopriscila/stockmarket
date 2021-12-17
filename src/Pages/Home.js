@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import iex from "../api/iex";
-import Menu from "../Components/Commons/Menu";
-import PageLayout from "../Components/Commons/PageLayout";
 import DashBoard from "../Components/Commons/DashBoard";
 import UserBoard from "../Components/Commons/UserBoard";
 import Alert from "../Components/Commons/Alert";
@@ -76,8 +74,7 @@ const Home = ({username}) => {
   return (
     <>
       <Alert alert={alert} alertDisplay={alertDisplay} goBack={goBack} />
-      <PageLayout>
-        <Menu />
+      
         <DashBoard
           company={company}
           onSearchSubmit={onSearchSubmit}
@@ -89,7 +86,7 @@ const Home = ({username}) => {
           favourites={favourites}
           removeFromFavourites={removeFromFavourites}
         />
-      </PageLayout>
+      
     </>
   );
 };
